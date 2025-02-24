@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario ITM - Contacto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="index.js"></script>
+</head>
+<body>
+    <header>
+        <img src="assets/itm-logo.png" alt="ITM Logo" class="header-logo">
+    </header>
+
+    <div class="stepper-wrapper">
+        <div class="stepper-item completed">
+            <div class="step-counter">1</div>
+            <div class="step-name">Formularios</div>
+        </div>
+        <div class="stepper-item active">
+            <div class="step-counter">2</div>
+            <div class="step-name">Carga Documentos</div>
+        </div>
+        <div class="stepper-item">
+            <div class="step-counter">3</div>
+            <div class="step-name">Pago</div>
+        </div>
+        <div class="stepper-item">
+            <div class="step-counter">4</div>
+            <div class="step-name">Entrevista</div>
+        </div>
+    </div>
+
+    <main class="form-container">
+        <details class="form-section" open>
+            <summary>
+                <div class="summary-content">
+                    <div class="step-indicator">1</div>
+                    <div class="summary-text">
+                        <h3>Información Personal</h3>
+                        <p>Datos básicos de contacto</p>
+                    </div>
+                    <div class="status-icon completed">✓</div>
+                </div>
+            </summary>
+            <div class="form-content">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" placeholder="300 123 4567">
+                </div>
+            </div>
+        </details>
+
+        <details class="form-section" open>
+            <summary>
+                <div class="summary-content">
+                    <div class="step-indicator active">2</div>
+                    <div class="summary-text">
+                        <h3>Documentos Requeridos</h3>
+                        <p>Carga los documentos necesarios</p>
+                    </div>
+                    <div class="status-icon">→</div>
+                </div>
+            </summary>
+            <div class="form-content">
+                <div class="upload-section">
+                    <div class="upload-box">
+                        <i class="upload-icon">📄</i>
+                        <p>Documento de identidad</p>
+                        <button class="upload-btn">Subir archivo</button>
+                    </div>
+                    <div class="upload-box">
+                        <i class="upload-icon">📄</i>
+                        <p>Certificado de estudios</p>
+                        <button class="upload-btn">Subir archivo</button>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="form-section">
+            <summary>
+                <div class="summary-content">
+                    <div class="step-indicator">3</div>
+                    <div class="summary-text">
+                        <h3>Información de Pago</h3>
+                        <p>Realiza el pago de tu inscripción</p>
+                    </div>
+                    <div class="status-icon">→</div>
+                </div>
+            </summary>
+            <div class="form-content">
+                <!-- Contenido del formulario de pago -->
+            </div>
+        </details>
+
+        <details class="form-section">
+            <summary>
+                <div class="summary-content">
+                    <div class="step-indicator">4</div>
+                    <div class="summary-text">
+                        <h3>Programar Entrevista</h3>
+                        <p>Selecciona la fecha de tu entrevista</p>
+                    </div>
+                    <div class="status-icon">→</div>
+                </div>
+            </summary>
+            <div class="form-content">
+                <!-- Contenido del formulario de entrevista -->
+            </div>
+        </details>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
