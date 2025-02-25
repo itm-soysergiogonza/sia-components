@@ -1,0 +1,274 @@
+/* Variables del sistema de diseño ITM */
+:root {
+    --primary-blue: #011C5B;
+    --secondary-blue: #1a3a8f;
+    --text-light: rgba(255, 255, 255, 0.8);
+    --border-light: rgba(255, 255, 255, 0.15);
+    --primary-grey: #1D1D1B;
+    --primary-black: #000000;
+    --light-gray: #e6e6e6;
+    --success-color: #4CAF50;
+    --border-color: #ddd;
+    --text-gray: #666;
+    --montserrat: 'Montserrat', sans-serif;
+}
+
+/* Estilos generales */
+body {
+    font-family: var(--montserrat);
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+    color: var(--primary-grey);
+}
+
+header {
+    background: var(--primary-blue);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-logo {
+    height: 40px;
+}
+
+/* Estilos de secciones */
+.section-title {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.tooltip-demo {
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Personalización de tooltips de Bootstrap */
+.tooltip {
+    font-family: var(--montserrat);
+}
+
+.tooltip .tooltip-inner {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    max-width: 250px;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: var(--primary-blue);
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: var(--primary-blue);
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: var(--primary-blue);
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: var(--primary-blue);
+}
+
+/* Estilos para botones con tooltips */
+.btn {
+    font-family: var(--montserrat);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-blue);
+    border-color: var(--secondary-blue);
+}
+
+/* Estilos para enlaces con tooltips */
+.tooltip-text a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--primary-blue);
+}
+
+.tooltip-text a:hover {
+    color: var(--secondary-blue);
+    border-bottom-style: solid;
+}
+
+/* Estilos para íconos en tooltips */
+.fas {
+    margin-right: 0.25rem;
+}
+
+/* Estilos para tooltips en formularios */
+.form-label {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.form-label .fas {
+    color: var(--text-gray);
+    cursor: help;
+}
+
+.form-control {
+    border-color: var(--border-color);
+    font-family: var(--montserrat);
+}
+
+.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(1, 28, 91, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tooltip-demo {
+        padding: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .tooltip-demo {
+        padding: 0.75rem;
+    }
+}
+
+/* Estilos para select con tooltips */
+.select-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.select-wrapper {
+    position: relative;
+    margin-top: 0.5rem;
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-family: var(--montserrat);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23011C5B' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.form-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(1, 28, 91, 0.25);
+    outline: none;
+}
+
+.form-select option {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.form-select option:hover {
+    background-color: var(--light-gray);
+}
+
+/* Personalización del tooltip para opciones del select */
+.tooltip[data-bs-popper] {
+    z-index: 1070;
+}
+
+.tooltip-inner {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    max-width: 300px;
+    line-height: 1.4;
+}
+
+/* Estilos para select con íconos de ayuda */
+.select-with-icons {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+    font-family: var(--montserrat);
+    position: relative;
+    cursor: pointer;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.option-row:last-child {
+    border-bottom: none;
+}
+
+.option-row:hover {
+    background-color: var(--light-gray);
+}
+
+.option-row.selected {
+    background-color: rgba(1, 28, 91, 0.1);
+    font-weight: 500;
+}
+
+.option-text {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.help-icon {
+    color: var(--text-gray);
+    cursor: help;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.help-icon:hover {
+    color: var(--primary-blue);
+}
+
+/* Ocultar el select nativo pero mantener accesibilidad */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+} 
