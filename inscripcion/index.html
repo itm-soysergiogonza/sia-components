@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Formulario de Inscripción</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <header class="bg-primary text-white px-8 py-4 shadow-md">
+        <div class="container mx-auto flex items-center">
+            <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+            <span class="ml-2 font-semibold">Sistema de Inscripción</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4 text-gray-800">Formulario de Inscripción</h1>
+        <p class="text-xl text-gray-600 mb-8">Complete los siguientes datos para su proceso de inscripción</p>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+            <div class="p-6">
+                <!-- Sección de Cédula -->
+                <div class="mb-6">
+                    <label for="cedula" class="block text-gray-700 font-medium mb-2">Cédula</label>
+                    <input type="text" id="cedula" placeholder="Ingrese su número de documento" 
+                           class="w-1/2 px-4 py-3 bg-gray-200 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+
+                <!-- Tabs de Tipo de Programa -->
+                <div class="mb-2 flex items-center">
+                    <label class="text-gray-700 font-medium">Seleccione modalidad</label>
+                    <div class="ml-2 relative inline-block">
+                        <i id="info-icon" class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                        <div id="tooltip" class="absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-sm">Información de modalidades</span>
+                                <button id="close-tooltip" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <p class="text-sm mb-2"><span class="font-bold">POSTGRADO:</span> Programas de especialización, maestría o doctorado para personas con título profesional.</p>
+                            <p class="text-sm"><span class="font-bold">PREGRADO:</span> Programas profesionales o tecnológicos de nivel universitario.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-gray-300 rounded-md mb-6 w-1/2 mx-auto overflow-hidden">
+                    <div class="flex">
+                        <button class="flex-1 py-2 px-3 text-gray-700 font-medium hover:bg-gray-100 text-sm border-r border-gray-300" data-tab="pos">POSTGRADO</button>
+                        <button class="flex-1 py-2 px-3 text-gray-700 font-medium hover:bg-gray-100 text-sm" data-tab="pre">PREGRADO</button>
+                    </div>
+                </div>
+
+                <!-- Contenido específico para cada tab -->
+                <div class="mb-6">
+                    <div id="pos-content" class="p-4 bg-blue-50 rounded-md hidden">
+                        <h3 class="font-medium text-lg text-gray-800 mb-2">Formulario para POSTGRADO</h3>
+                        <p class="text-gray-700">Contenido específico para el programa de posgrado.</p>
+                    </div>
+                    <div id="pre-content" class="p-4 bg-green-50 rounded-md hidden">
+                        <h3 class="font-medium text-lg text-gray-800 mb-2">Formulario para PREGRADO</h3>
+                        <p class="text-gray-700">Contenido específico para el programa de pregrado.</p>
+                    </div>
+                    <div id="no-selection" class="p-4 bg-yellow-50 rounded-md border-l-4 border-yellow-500">
+                        <h3 class="font-medium text-lg text-gray-800 mb-2">Selección requerida</h3>
+                        <p class="text-gray-700">Por favor seleccione una modalidad (POSTGRADO o PREGRADO) para continuar.</p>
+                    </div>
+                </div>
+
+                <!-- Recordatorio de documentos -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold mb-3 text-gray-800">¡Recuerda tener los siguientes a la mano para realizar tu proceso de inscripción</h2>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li class="text-gray-700">Cedula de Ciudadanía</li>
+                        <li class="text-gray-700">pruebas de estado (Icfes/Saber11/otros)</li>
+                        <li class="text-gray-700">Diploma de Grado</li>
+                        <li class="text-gray-700">Recibo de Servicios</li>
+                    </ol>
+                </div>
+
+                <!-- Tipo de Inscripción -->
+                <div class="mb-6">
+                    <label for="tipoInscripcion" class="block text-gray-700 font-medium mb-2">Tipo de Inscripción</label>
+                    <div class="relative">
+                        <select id="tipoInscripcion" class="w-1/2 px-4 py-3 bg-gray-200 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none">
+                            <option value="" selected disabled>Seleccione el tipo de inscripción</option>
+                            <option value="nuevo">Estudiante Nuevo</option>
+                            <option value="transferencia">Transferencia</option>
+                            <option value="reingreso">Reingreso</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 mr-3 flex items-center px-2 text-gray-700" style="right: 50%;">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de información adicional -->
+                <div class="mt-8">
+                    <div class="w-1/2 mx-auto h-32 bg-gray-200 rounded-md flex items-center justify-center">
+                        <p class="text-gray-500 text-center">
+                            <i class="fas fa-info-circle text-2xl mb-2"></i><br>
+                            La información adicional se mostrará aquí según el tipo de inscripción seleccionado
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="mt-8 flex justify-end space-x-4">
+                    <button class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors">
+                        Cancelar
+                    </button>
+                    <button class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de ayuda -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r-md">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-info-circle text-blue-500"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-blue-700">
+                        Si tienes problemas con tu proceso de inscripción, puedes contactar a la oficina de admisiones al correo: <span class="font-medium">admisiones@itm.edu.co</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-start">
+            <a href="../index.html" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Script para manejar la selección de tabs
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.flex button[data-tab]');
+            const posContent = document.getElementById('pos-content');
+            const preContent = document.getElementById('pre-content');
+            const noSelectionContent = document.getElementById('no-selection');
+            let selectedTab = null;
+            
+            // Botón de continuar
+            const btnContinuar = document.querySelector('.bg-primary.text-white.rounded-md');
+            
+            // Inicialmente deshabilitar el botón continuar
+            if (btnContinuar) {
+                btnContinuar.disabled = true;
+                btnContinuar.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            
+            // Manejo del tooltip
+            const infoIcon = document.getElementById('info-icon');
+            const tooltip = document.getElementById('tooltip');
+            const closeTooltip = document.getElementById('close-tooltip');
+            
+            // Mostrar/ocultar tooltip al hacer clic en el ícono de información
+            infoIcon.addEventListener('click', function() {
+                tooltip.classList.toggle('hidden');
+            });
+            
+            // Cerrar tooltip al hacer clic en el botón de cerrar
+            closeTooltip.addEventListener('click', function(e) {
+                e.stopPropagation(); // Evita que el clic se propague al ícono
+                tooltip.classList.add('hidden');
+            });
+            
+            // Función para mostrar el contenido correspondiente al tab seleccionado
+            function showContent(tabType) {
+                if (tabType === 'pos') {
+                    posContent.classList.remove('hidden');
+                    preContent.classList.add('hidden');
+                    noSelectionContent.classList.add('hidden');
+                    selectedTab = 'pos';
+                } else if (tabType === 'pre') {
+                    preContent.classList.remove('hidden');
+                    posContent.classList.add('hidden');
+                    noSelectionContent.classList.add('hidden');
+                    selectedTab = 'pre';
+                } else {
+                    posContent.classList.add('hidden');
+                    preContent.classList.add('hidden');
+                    noSelectionContent.classList.remove('hidden');
+                    selectedTab = null;
+                }
+                
+                // Habilitar/deshabilitar botón continuar según selección
+                if (btnContinuar) {
+                    if (selectedTab) {
+                        btnContinuar.disabled = false;
+                        btnContinuar.classList.remove('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        btnContinuar.disabled = true;
+                        btnContinuar.classList.add('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            }
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Quitar clase activa de todos los tabs
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-primary', 'text-white');
+                        t.classList.add('text-gray-700', 'hover:bg-gray-100');
+                    });
+                    
+                    // Añadir clase activa al tab seleccionado
+                    this.classList.remove('text-gray-700', 'hover:bg-gray-100');
+                    this.classList.add('bg-primary', 'text-white');
+                    
+                    // Guardar el tipo de programa seleccionado (pos o pre)
+                    const programType = this.getAttribute('data-tab');
+                    console.log('Tipo de programa seleccionado:', programType);
+                    
+                    // Mostrar el contenido correspondiente al tab seleccionado
+                    showContent(programType);
+                });
+            });
+            
+            // Inicialmente mostrar el mensaje de selección requerida
+            showContent(null);
+            
+            // Manejo del dropdown
+            const tipoInscripcion = document.getElementById('tipoInscripcion');
+            
+            tipoInscripcion.addEventListener('change', function() {
+                // Aquí se podría implementar lógica para mostrar diferentes campos según la selección
+                console.log('Tipo de inscripción seleccionado:', this.value);
+            });
+        });
+    </script>
+</body>
+</html> 

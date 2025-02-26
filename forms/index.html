@@ -3,123 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario ITM - Contacto</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="index.css" />
-    <script defer src="index.js"></script>
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        },
+                        success: '#4CAF50'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <header>
-        <img src="assets/itm-logo.png" alt="ITM Logo" class="header-logo">
+<body class="bg-gray-100 font-montserrat m-0 p-0">
+    <header class="bg-primary shadow-md px-8 py-4">
+        <img src="assets/itm-logo.png" alt="ITM Logo" class="h-10">
     </header>
 
-    <div class="stepper-wrapper">
-        <div class="stepper-item completed">
-            <div class="step-counter">1</div>
-            <div class="step-name">Formularios</div>
+    <div class="flex justify-between max-w-3xl mx-auto my-8 px-4 relative">
+        <!-- Stepper -->
+        <div class="flex-1 flex flex-col items-center relative">
+            <div class="w-10 h-10 rounded-full bg-success text-white flex items-center justify-center z-10 mb-2 font-semibold">1</div>
+            <span class="text-sm font-medium text-gray-700">Formularios</span>
+            <div class="absolute w-full h-0.5 bg-success top-5 left-1/2 z-0"></div>
         </div>
-        <div class="stepper-item active">
-            <div class="step-counter">2</div>
-            <div class="step-name">Carga Documentos</div>
+        
+        <div class="flex-1 flex flex-col items-center relative">
+            <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center z-10 mb-2 font-semibold">2</div>
+            <span class="text-sm font-medium text-primary">Carga Documentos</span>
+            <div class="absolute w-full h-0.5 bg-gray-300 top-5 left-1/2 z-0"></div>
         </div>
-        <div class="stepper-item">
-            <div class="step-counter">3</div>
-            <div class="step-name">Pago</div>
+        
+        <div class="flex-1 flex flex-col items-center relative">
+            <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center z-10 mb-2 font-semibold">3</div>
+            <span class="text-sm font-medium text-gray-700">Pago</span>
+            <div class="absolute w-full h-0.5 bg-gray-300 top-5 left-1/2 z-0"></div>
         </div>
-        <div class="stepper-item">
-            <div class="step-counter">4</div>
-            <div class="step-name">Entrevista</div>
+        
+        <div class="flex-1 flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center z-10 mb-2 font-semibold">4</div>
+            <span class="text-sm font-medium text-gray-700">Entrevista</span>
         </div>
     </div>
 
-    <main class="form-container">
-        <details class="form-section" open>
-            <summary>
-                <div class="summary-content">
-                    <div class="step-indicator">1</div>
-                    <div class="summary-text">
-                        <h3>Información Personal</h3>
-                        <p>Datos básicos de contacto</p>
+    <main class="max-w-3xl mx-auto px-4">
+        <details class="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden open" open>
+            <summary class="cursor-pointer list-none p-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-8 h-8 rounded-full bg-success text-white flex items-center justify-center font-semibold">1</div>
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Información Personal</h3>
+                        <p class="text-gray-600 text-sm">Datos básicos de contacto</p>
                     </div>
-                    <div class="status-icon completed">✓</div>
+                    <div class="w-6 h-6 rounded-full bg-success text-white flex items-center justify-center">✓</div>
                 </div>
             </summary>
-            <div class="form-content">
-                <div class="form-group">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+            <div class="p-6 pt-0 border-t border-gray-100">
+                <div class="mb-4">
+                    <label for="nombre" class="block text-gray-700 font-medium mb-2">Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                 </div>
-                <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" placeholder="correo@ejemplo.com">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="correo@ejemplo.com" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                 </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" placeholder="300 123 4567">
+                <div class="mb-4">
+                    <label for="telefono" class="block text-gray-700 font-medium mb-2">Teléfono</label>
+                    <input type="tel" id="telefono" placeholder="300 123 4567" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                 </div>
             </div>
         </details>
 
-        <details class="form-section" open>
-            <summary>
-                <div class="summary-content">
-                    <div class="step-indicator active">2</div>
-                    <div class="summary-text">
-                        <h3>Documentos Requeridos</h3>
-                        <p>Carga los documentos necesarios</p>
+        <details class="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden open" open>
+            <summary class="cursor-pointer list-none p-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">2</div>
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Documentos Requeridos</h3>
+                        <p class="text-gray-600 text-sm">Carga los documentos necesarios</p>
                     </div>
-                    <div class="status-icon">→</div>
+                    <div class="text-primary text-xl">→</div>
                 </div>
             </summary>
-            <div class="form-content">
-                <div class="upload-section">
-                    <div class="upload-box">
-                        <i class="upload-icon">📄</i>
-                        <p>Documento de identidad</p>
-                        <button class="upload-btn">Subir archivo</button>
+            <div class="p-6 pt-0 border-t border-gray-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary transition-colors">
+                        <span class="text-3xl mb-2">📄</span>
+                        <p class="text-gray-700 mb-3">Documento de identidad</p>
+                        <button class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">Subir archivo</button>
                     </div>
-                    <div class="upload-box">
-                        <i class="upload-icon">📄</i>
-                        <p>Certificado de estudios</p>
-                        <button class="upload-btn">Subir archivo</button>
+                    <div class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary transition-colors">
+                        <span class="text-3xl mb-2">📄</span>
+                        <p class="text-gray-700 mb-3">Certificado de estudios</p>
+                        <button class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">Subir archivo</button>
                     </div>
                 </div>
             </div>
         </details>
 
-        <details class="form-section">
-            <summary>
-                <div class="summary-content">
-                    <div class="step-indicator">3</div>
-                    <div class="summary-text">
-                        <h3>Información de Pago</h3>
-                        <p>Realiza el pago de tu inscripción</p>
+        <details class="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden">
+            <summary class="cursor-pointer list-none p-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-semibold">3</div>
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Información de Pago</h3>
+                        <p class="text-gray-600 text-sm">Realiza el pago de tu inscripción</p>
                     </div>
-                    <div class="status-icon">→</div>
+                    <div class="text-gray-500 text-xl">→</div>
                 </div>
             </summary>
-            <div class="form-content">
+            <div class="p-6 pt-0 border-t border-gray-100">
                 <!-- Contenido del formulario de pago -->
             </div>
         </details>
 
-        <details class="form-section">
-            <summary>
-                <div class="summary-content">
-                    <div class="step-indicator">4</div>
-                    <div class="summary-text">
-                        <h3>Programar Entrevista</h3>
-                        <p>Selecciona la fecha de tu entrevista</p>
+        <details class="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden">
+            <summary class="cursor-pointer list-none p-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-semibold">4</div>
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Programar Entrevista</h3>
+                        <p class="text-gray-600 text-sm">Selecciona la fecha de tu entrevista</p>
                     </div>
-                    <div class="status-icon">→</div>
+                    <div class="text-gray-500 text-xl">→</div>
                 </div>
             </summary>
-            <div class="form-content">
+            <div class="p-6 pt-0 border-t border-gray-100">
                 <!-- Contenido del formulario de entrevista -->
             </div>
         </details>
     </main>
 
-    <script src="js/script.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

@@ -1,17 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl, {
-            trigger: 'hover focus',
-            animation: true,
-            delay: {
-                show: 200,
-                hide: 100
-            }
-        });
-    });
-
     // Manejar el botón de mostrar/ocultar contraseña
     const togglePassword = document.getElementById('togglePassword');
     const password = document.getElementById('password');
@@ -29,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Manejar el formulario de login
-    const loginForm = document.querySelector('.login-form');
+    const loginForm = document.querySelector('form');
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
