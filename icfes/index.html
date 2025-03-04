@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Carga de Resultados ICFES</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <header class="bg-primary text-white px-8 py-4 shadow-md">
+        <div class="container mx-auto flex items-center">
+            <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+            <span class="ml-2 font-semibold">Carga de Resultados ICFES</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-2xl font-bold mb-2 text-gray-800">Puntaje obtenido en las pruebas Saber 11 o Examen de Estado</h1>
+            
+            <!-- Botón de descarga -->
+            <a href="#" class="inline-block mb-8 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                <i class="fas fa-download mr-2"></i>
+                Descarga tu prueba Icfes o Saber 11
+            </a>
+
+            <!-- Campos de puntaje -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="space-y-4">
+                    <!-- Lectura Crítica -->
+                    <div class="border border-gray-300 rounded-md p-4">
+                        <div class="flex items-center">
+                            <label class="text-lg font-medium text-gray-700">Lectura Crítica</label>
+                            <div class="ml-2 relative" id="tooltip-lectura">
+                                <i class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                                <div class="tooltip hidden absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-sm">Información</span>
+                                        <button class="close-tooltip text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm">Puntaje obtenido en la prueba de Lectura Crítica del examen Saber 11.</p>
+                                </div>
+                            </div>
+                            <input type="number" class="ml-auto w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <!-- Matemáticas -->
+                    <div class="border border-gray-300 rounded-md p-4">
+                        <div class="flex items-center">
+                            <label class="text-lg font-medium text-gray-700">Matemáticas</label>
+                            <div class="ml-2 relative" id="tooltip-matematicas">
+                                <i class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                                <div class="tooltip hidden absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-sm">Información</span>
+                                        <button class="close-tooltip text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm">Puntaje obtenido en la prueba de Matemáticas del examen Saber 11.</p>
+                                </div>
+                            </div>
+                            <input type="number" class="ml-auto w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <!-- Ciencias Naturales -->
+                    <div class="border border-gray-300 rounded-md p-4">
+                        <div class="flex items-center">
+                            <label class="text-lg font-medium text-gray-700">Ciencias Naturales</label>
+                            <div class="ml-2 relative" id="tooltip-ciencias">
+                                <i class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                                <div class="tooltip hidden absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-sm">Información</span>
+                                        <button class="close-tooltip text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm">Puntaje obtenido en la prueba de Ciencias Naturales del examen Saber 11.</p>
+                                </div>
+                            </div>
+                            <input type="number" class="ml-auto w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <!-- Sociales y Ciudadanas -->
+                    <div class="border border-gray-300 rounded-md p-4">
+                        <div class="flex items-center">
+                            <label class="text-lg font-medium text-gray-700">Sociales y Ciudadanas</label>
+                            <div class="ml-2 relative" id="tooltip-sociales">
+                                <i class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                                <div class="tooltip hidden absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-sm">Información</span>
+                                        <button class="close-tooltip text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm">Puntaje obtenido en la prueba de Sociales y Ciudadanas del examen Saber 11.</p>
+                                </div>
+                            </div>
+                            <input type="number" class="ml-auto w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <!-- Inglés -->
+                    <div class="border border-gray-300 rounded-md p-4">
+                        <div class="flex items-center">
+                            <label class="text-lg font-medium text-gray-700">Inglés</label>
+                            <div class="ml-2 relative" id="tooltip-ingles">
+                                <i class="fas fa-info-circle text-blue-500 cursor-pointer"></i>
+                                <div class="tooltip hidden absolute left-6 top-0 bg-white p-3 shadow-lg rounded-md border border-gray-200 w-64 z-20">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-sm">Información</span>
+                                        <button class="close-tooltip text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-sm">Puntaje obtenido en la prueba de Inglés del examen Saber 11.</p>
+                                </div>
+                            </div>
+                            <input type="number" class="ml-auto w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="0-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de carga de archivo -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-center w-full">
+                    <label class="w-full flex flex-col items-center px-4 py-6 bg-white rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mr-2"></i>
+                            <span class="text-primary font-medium">Carga tu Icfes aquí</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">Solo se admiten archivos PDF</p>
+                        <input type="file" class="hidden" accept=".pdf">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Mensajes de error -->
+            <div class="flex space-x-4 mb-8">
+                <div class="flex-1 p-4 bg-red-50 border-l-4 border-red-500 rounded-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-red-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">El archivo no pudo ser validado por nuestro sistema. Cargue los resultados de las asignaturas de forma manual.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 p-4 bg-red-50 border-l-4 border-red-500 rounded-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-red-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">Formato no válido. Solo se admiten archivos PDF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón Continuar -->
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Volver
+                </a>
+                <button class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejo de tooltips
+            const tooltipTriggers = document.querySelectorAll('.fa-info-circle');
+            
+            tooltipTriggers.forEach(trigger => {
+                const tooltipContainer = trigger.parentElement;
+                const tooltip = tooltipContainer.querySelector('.tooltip');
+                const closeBtn = tooltip.querySelector('.close-tooltip');
+
+                // Mostrar tooltip al hacer clic en el ícono de información
+                trigger.addEventListener('click', () => {
+                    // Ocultar todos los tooltips primero
+                    document.querySelectorAll('.tooltip').forEach(t => t.classList.add('hidden'));
+                    // Mostrar este tooltip
+                    tooltip.classList.remove('hidden');
+                });
+
+                // Cerrar tooltip al hacer clic en el botón de cerrar
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    tooltip.classList.add('hidden');
+                });
+            });
+
+            // Validación de archivos
+            const fileInput = document.querySelector('input[type="file"]');
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file && !file.type.includes('pdf')) {
+                    // Mostrar mensaje de error de formato
+                    alert('Solo se admiten archivos PDF');
+                    this.value = ''; // Limpiar el input
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

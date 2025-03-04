@@ -39,24 +39,32 @@
                     <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
                     <span class="ml-2 font-semibold hidden sm:inline">Componentes SIA</span>
                 </a>
-                <div class="relative">
-                    <button id="themeDropdownButton" class="flex items-center space-x-2 text-white focus:outline-none">
-                        <i class="fas fa-moon" id="theme-icon"></i>
-                        <span id="theme-text" class="hidden sm:inline">Tema</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="themeDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden dark:bg-gray-800 z-10">
-                        <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="light">
-                            <i class="fas fa-sun mr-2"></i>Claro
+                <div class="flex items-center space-x-6">
+                    <!-- Correo del usuario -->
+                    <div class="hidden md:flex items-center space-x-2">
+                        <i class="fas fa-user-circle text-gray-300"></i>
+                        <span class="text-gray-300 font-medium">usuario@itm.edu.co</span>
+                    </div>
+                    <!-- Selector de tema -->
+                    <div class="relative">
+                        <button id="themeDropdownButton" class="flex items-center space-x-2 text-white focus:outline-none">
+                            <i class="fas fa-moon" id="theme-icon"></i>
+                            <span id="theme-text" class="hidden sm:inline">Tema</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
-                        <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="dark">
-                            <i class="fas fa-moon mr-2"></i>Oscuro
-                        </button>
-                        <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="system">
-                            <i class="fas fa-laptop mr-2"></i>Sistema
-                        </button>
+                        <div id="themeDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden dark:bg-gray-800 z-10">
+                            <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="light">
+                                <i class="fas fa-sun mr-2"></i>Claro
+                            </button>
+                            <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="dark">
+                                <i class="fas fa-moon mr-2"></i>Oscuro
+                            </button>
+                            <button class="theme-option w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 flex items-center" data-theme="system">
+                                <i class="fas fa-laptop mr-2"></i>Sistema
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,39 +72,145 @@
     </nav>
 
     <div class="container mx-auto px-4 my-8">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-4xl mx-auto">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Componente Header con Selector de Tema</h2>
-                    
-                    <div class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 p-4 rounded-lg mb-6">
-                        <div class="flex items-start">
-                            <i class="fas fa-info-circle mt-1 mr-2"></i>
-                            <p>Este componente permite a los usuarios cambiar entre temas claro, oscuro o usar la configuración del sistema.</p>
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Variantes del Header</h2>
+
+                    <!-- Header Principal -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-home mr-2"></i>
+                            Header Principal
+                        </h3>
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-black text-white p-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                                        <span class="ml-2 font-semibold">Sistema de Información Académica</span>
+                                    </div>
+                                    <div class="flex items-center space-x-6">
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-user-circle text-gray-300"></i>
+                                            <span class="text-gray-300">usuario@itm.edu.co</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-moon"></i>
+                                            <span>Tema</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-600 dark:text-gray-400">
+                                Usado en la página principal del SIA. Incluye logo, título completo y todas las funcionalidades.
+                            </div>
                         </div>
                     </div>
 
-                    <h4 class="text-lg font-semibold mt-6 mb-4 text-gray-800 dark:text-white">Características</h4>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Cambio entre tema claro y oscuro</span>
-                        </li>
-                        <li class="flex items-center p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Opción para usar preferencia del sistema</span>
-                        </li>
-                        <li class="flex items-center p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Guarda la preferencia del usuario</span>
-                        </li>
-                        <li class="flex items-center p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Interfaz responsiva</span>
-                        </li>
-                    </ul>
+                    <!-- Header de Formularios -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-wpforms mr-2"></i>
+                            Header de Formularios
+                        </h3>
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-primary text-white p-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                                        <span class="ml-2 font-semibold">Formulario de Inscripción</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span>usuario@itm.edu.co</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-600 dark:text-gray-400">
+                                Utilizado en secciones de formularios. Fondo azul institucional, sin selector de tema.
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="flex justify-end">
+                    <!-- Header de Componentes -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-puzzle-piece mr-2"></i>
+                            Header de Componentes
+                        </h3>
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-black text-white p-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                                        <span class="ml-2 font-semibold">Componentes SIA</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-moon"></i>
+                                        <span>Tema</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-600 dark:text-gray-400">
+                                Versión simplificada para la documentación de componentes. Fondo negro, solo selector de tema.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header Responsivo -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-mobile-alt mr-2"></i>
+                            Header Responsivo
+                        </h3>
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-black text-white p-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-8">
+                                        <span class="ml-2 font-semibold text-sm">SIA</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-moon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-600 dark:text-gray-400">
+                                Versión móvil con iconos sin texto. Se adapta automáticamente en pantallas pequeñas.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Características Comunes -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
+                        <h4 class="font-semibold mb-4 text-gray-800 dark:text-white">Características Comunes</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Altura consistente de 64px (padding y logo adaptados)</span>
+                            </li>
+                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Sistema de espaciado uniforme (padding horizontal de 1rem en móvil, 1.5rem en desktop)</span>
+                            </li>
+                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Fuente Montserrat para todo el texto</span>
+                            </li>
+                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Sombra consistente para separación visual</span>
+                            </li>
+                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>Soporte para modo oscuro en todas las variantes</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
                         <a href="../index.html" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none">
                             <i class="fas fa-arrow-left mr-2"></i>
                             Volver

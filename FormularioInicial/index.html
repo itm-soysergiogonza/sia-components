@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Formulario de Inscripción</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <header class="bg-primary text-white px-8 py-4 shadow-md">
+        <div class="container mx-auto flex items-center">
+            <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+            <span class="ml-2 font-semibold">Formulario de Inscripción</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Selección de Modalidad -->
+            <div class="mb-8">
+                <h2 class="text-center text-xl font-semibold mb-6">Seleccione Modalidad</h2>
+                <div class="flex justify-center space-x-4">
+                    <button id="btn-pregrado" class="w-48 py-3 px-6 bg-primary text-white font-medium rounded transition-colors hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        PREGRADO
+                    </button>
+                    <button id="btn-posgrado" class="w-48 py-3 px-6 bg-gray-200 text-gray-700 font-medium rounded transition-colors hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                        POSGRADO
+                    </button>
+                </div>
+                <p class="text-center text-gray-600 mt-4 italic">
+                    Pregrado: Son los programas que están en disponibilidad una vez finalizado el bachiller.
+                </p>
+            </div>
+
+            <!-- Información de Documentos -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <p class="text-gray-700 mb-4">¡Recuerda tener los siguientes documentos a la mano para realizar tu proceso de inscripción; estos deben estar individuales en formato PDF.</p>
+                <ol class="list-decimal list-inside space-y-2 text-gray-600">
+                    <li>Cédula de Ciudadanía</li>
+                    <li>pruebas de estado (Icfes/Saber11/otros)</li>
+                    <li>Diploma de Grado</li>
+                    <li>Recibo de Servicios</li>
+                </ol>
+            </div>
+
+            <!-- Formulario -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="space-y-6">
+                    <!-- Identificación -->
+                    <div class="flex items-center space-x-4">
+                        <label class="w-32 text-gray-700 font-medium">Identificación</label>
+                        <div class="flex-1 flex space-x-2">
+                            <input type="text" id="identificacion" class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="1115078499">
+                            <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                                Verificar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de Inscripción -->
+                    <div class="flex items-center space-x-4">
+                        <label class="w-32 text-gray-700 font-medium">Tipo de Inscripción</label>
+                        <div class="flex-1">
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                <option value="" selected disabled>NUEVO</option>
+                                <option value="nuevo">NUEVO</option>
+                                <option value="transferencia">TRANSFERENCIA</option>
+                                <option value="reingreso">REINGRESO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Datos de Inscripción -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">DATOS DE INSCRIPCIÓN PARA EL PERIODO - 2024-2</h3>
+                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">Seleccione un Programa de Interés</p>
+
+                        <!-- Primera Opción -->
+                        <div class="grid grid-cols-2 gap-6 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Programa Primera Opción <span class="text-red-500">*</span></label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                    <option value="" selected disabled>ADMINISTRACIÓN TECNOLÓGICA</option>
+                                    <option value="admin_tec">ADMINISTRACIÓN TECNOLÓGICA</option>
+                                    <option value="ing_sistemas">INGENIERÍA DE SISTEMAS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Campus Primera Opción <span class="text-red-500">*</span></label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                    <option value="" selected disabled>FRATERNIDAD MEDELLÍN</option>
+                                    <option value="fraternidad">FRATERNIDAD MEDELLÍN</option>
+                                    <option value="robledo">ROBLEDO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Segunda Opción -->
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Programa Segunda Opción <span class="text-red-500">*</span></label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                    <option value="" selected disabled>CIENCIAS AMBIENTALES</option>
+                                    <option value="ciencias_amb">CIENCIAS AMBIENTALES</option>
+                                    <option value="ing_ambiental">INGENIERÍA AMBIENTAL</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Campus Segunda Opción <span class="text-red-500">*</span></label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                    <option value="" selected disabled>ROBLEDO</option>
+                                    <option value="robledo">ROBLEDO</option>
+                                    <option value="fraternidad">FRATERNIDAD MEDELLÍN</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Medio de Enterado -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">¿Por cuál medio se enteró de las inscripciones? <span class="text-red-500">*</span></label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+                                <option value="" selected disabled>BUSCADOR DE INTERNET</option>
+                                <option value="internet">BUSCADOR DE INTERNET</option>
+                                <option value="redes">REDES SOCIALES</option>
+                                <option value="referido">REFERIDO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="flex justify-between mt-8">
+                <a href="../index.html" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Volver
+                </a>
+                <button class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnPregrado = document.getElementById('btn-pregrado');
+            const btnPosgrado = document.getElementById('btn-posgrado');
+
+            function setActiveButton(activeBtn, inactiveBtn) {
+                // Estilo para botón activo
+                activeBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                activeBtn.classList.add('bg-primary', 'text-white');
+                
+                // Estilo para botón inactivo
+                inactiveBtn.classList.remove('bg-primary', 'text-white');
+                inactiveBtn.classList.add('bg-gray-200', 'text-gray-700');
+            }
+
+            btnPregrado.addEventListener('click', () => setActiveButton(btnPregrado, btnPosgrado));
+            btnPosgrado.addEventListener('click', () => setActiveButton(btnPosgrado, btnPregrado));
+
+            // Validación de identificación
+            const identificacionInput = document.getElementById('identificacion');
+            identificacionInput.addEventListener('input', function(e) {
+                // Permitir solo números
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                // Limitar a 10 dígitos
+                if (this.value.length > 10) {
+                    this.value = this.value.slice(0, 10);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
