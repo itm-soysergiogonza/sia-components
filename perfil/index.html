@@ -1,0 +1,134 @@
+<!-- perfil/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Perfil de Usuario</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <div class="container mx-auto p-4">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Cabecera de perfil -->
+            <div class="bg-primary h-48 relative">
+                <button class="absolute top-4 right-4 bg-white p-2 rounded-full text-primary hover:bg-gray-100">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+            </div>
+            
+            <!-- Info básica del usuario -->
+            <div class="relative px-6 -mt-20">
+                <div class="flex flex-col md:flex-row items-center md:items-end">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/150" alt="Usuario" class="w-40 h-40 rounded-full border-4 border-white">
+                        <button class="absolute bottom-4 right-4 bg-primary text-white p-2 rounded-full hover:bg-primary-dark">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="md:ml-6 text-center md:text-left mt-4 md:mt-0">
+                        <h1 class="text-2xl font-bold">Carlos Rodríguez</h1>
+                        <p class="text-gray-600">Ingeniería de Sistemas - Semestre 4</p>
+                        <p class="text-sm text-gray-500">ID: 1025146782</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pestañas de navegación -->
+            <div class="px-6 mt-6 border-b">
+                <ul class="flex space-x-4">
+                    <li class="border-b-2 border-primary pb-2">
+                        <a href="#" class="text-primary font-medium">Información Personal</a>
+                    </li>
+                    <li class="pb-2 hover:border-b-2 hover:border-gray-300">
+                        <a href="#" class="text-gray-500 hover:text-gray-700">Académico</a>
+                    </li>
+                    <li class="pb-2 hover:border-b-2 hover:border-gray-300">
+                        <a href="#" class="text-gray-500 hover:text-gray-700">Seguridad</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Contenido del perfil -->
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Información personal -->
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 text-primary">Información Personal</h2>
+                        <ul class="space-y-4">
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Nombre completo</span>
+                                <span>Carlos Andrés Rodríguez González</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Correo electrónico</span>
+                                <span>carlos.rodriguez@correo.itm.edu.co</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Teléfono</span>
+                                <span>+57 312 456 7890</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Fecha de nacimiento</span>
+                                <span>15 de abril de 1998</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Información académica -->
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 text-primary">Información Académica</h2>
+                        <ul class="space-y-4">
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Programa</span>
+                                <span>Ingeniería de Sistemas</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Facultad</span>
+                                <span>Ingeniería</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Semestre actual</span>
+                                <span>4</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-sm text-gray-500">Promedio acumulado</span>
+                                <span>4.2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Botones de acción -->
+                <div class="flex justify-end mt-6 space-x-3">
+                    <button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-gray-50">Cambiar contraseña</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">Editar perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

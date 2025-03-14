@@ -1,0 +1,204 @@
+<!-- certificados/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Generador de Certificados</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <div class="container mx-auto p-4">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-primary mb-6">Generador de Certificados</h1>
+            
+            <!-- Tipos de certificados -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <a href="#" class="border rounded-lg p-4 hover:shadow-md transition-all hover:border-primary flex items-start">
+                    <div class="bg-primary rounded-full p-3 text-white mr-3 flex-shrink-0">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Constancia de Estudio</h3>
+                        <p class="text-sm text-gray-600 mt-1">Documento que certifica tu condición de estudiante activo</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="border rounded-lg p-4 hover:shadow-md transition-all hover:border-primary flex items-start">
+                    <div class="bg-primary rounded-full p-3 text-white mr-3 flex-shrink-0">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Historial Académico</h3>
+                        <p class="text-sm text-gray-600 mt-1">Reporte de todas las materias cursadas y calificaciones</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="border rounded-lg p-4 hover:shadow-md transition-all hover:border-primary flex items-start">
+                    <div class="bg-primary rounded-full p-3 text-white mr-3 flex-shrink-0">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Horario Semestral</h3>
+                        <p class="text-sm text-gray-600 mt-1">Certificado con tu horario de clases actual</p>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Formulario de solicitud -->
+            <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">Solicitar Certificado</h2>
+                <!-- certificados/index.html (continuación) -->
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Certificado</label>
+                            <select class="w-full border rounded-lg px-4 py-2">
+                                <option>Constancia de Estudio</option>
+                                <option>Historial Académico</option>
+                                <option>Horario Semestral</option>
+                                <option>Certificado de Notas</option>
+                                <option>Paz y Salvo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Formato</label>
+                            <select class="w-full border rounded-lg px-4 py-2">
+                                <option>PDF</option>
+                                <option>Digital con firma electrónica</option>
+                                <option>Copia física (para recoger)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Período Académico</label>
+                            <select class="w-full border rounded-lg px-4 py-2">
+                                <option>2024-1 (Actual)</option>
+                                <option>2023-2</option>
+                                <option>2023-1</option>
+                                <option>Todos los períodos</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Destino</label>
+                            <input type="text" placeholder="¿Para qué entidad?" class="w-full border rounded-lg px-4 py-2">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Observaciones adicionales</label>
+                        <textarea class="w-full border rounded-lg px-4 py-2" rows="3" placeholder="Incluye cualquier requisito específico"></textarea>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                            <i class="fas fa-file-download mr-2"></i>Solicitar Certificado
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Certificados recientes -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Certificados Recientes</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50 border-b">
+                                <th class="text-left py-3 px-4">Certificado</th>
+                                <th class="text-center py-3 px-4">Fecha Solicitud</th>
+                                <th class="text-center py-3 px-4">Estado</th>
+                                <th class="text-center py-3 px-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <span>Constancia de Estudio</span>
+                                    </div>
+                                </td>
+                                <td class="text-center py-3 px-4">10/03/2024</td>
+                                <td class="text-center py-3 px-4">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Disponible</span>
+                                </td>
+                                <td class="text-center py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <span>Historial Académico</span>
+                                    </div>
+                                </td>
+                                <td class="text-center py-3 px-4">05/03/2024</td>
+                                <td class="text-center py-3 px-4">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Disponible</span>
+                                </td>
+                                <td class="text-center py-3 px-4">
+                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                                        <span>Paz y Salvo</span>
+                                    </div>
+                                </td>
+                                <td class="text-center py-3 px-4">28/02/2024</td>
+                                <td class="text-center py-3 px-4">
+                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">En proceso</span>
+                                </td>
+                                <td class="text-center py-3 px-4">
+                                    <button class="text-gray-300 cursor-not-allowed mr-2">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

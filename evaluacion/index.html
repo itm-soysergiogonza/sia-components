@@ -1,0 +1,202 @@
+<!-- evaluacion/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Evaluación Docente</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <div class="container mx-auto p-4">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold text-primary mb-2">Evaluación Docente</h1>
+                <p class="text-gray-600">Tu opinión es importante para mejorar la calidad educativa. Completa la evaluación de tus profesores del semestre actual.</p>
+                
+                <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-700">
+                                Debes completar la evaluación de todos tus docentes antes del 30 de marzo para poder visualizar tus calificaciones finales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progreso general -->
+            <div class="mb-8">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm font-medium">Progreso de evaluación</span>
+                    <span class="text-sm font-medium">2/5 completados</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-primary h-3 rounded-full" style="width: 40%"></div>
+                </div>
+            </div>
+            
+            <!-- Lista de docentes -->
+            <div class="space-y-4 mb-8">
+                <!-- Docente evaluado -->
+                <div class="border rounded-lg p-4 bg-green-50 border-green-200">
+                    <div class="flex flex-col md:flex-row justify-between mb-2">
+                        <div class="flex items-center mb-2 md:mb-0">
+                            <img src="https://via.placeholder.com/50" alt="Docente" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-semibold">Juan Carlos Martínez</h3>
+                                <p class="text-gray-600 text-sm">Programación Avanzada - Grupo 302</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Completado</span>
+                            <button class="ml-3 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-600">4.0/5.0</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Evaluado el 10/03/2024</span>
+                    </div>
+                </div>
+                
+                <!-- Docente evaluado -->
+                <div class="border rounded-lg p-4 bg-green-50 border-green-200">
+                    <div class="flex flex-col md:flex-row justify-between mb-2">
+                        <div class="flex items-center mb-2 md:mb-0">
+                            <img src="https://via.placeholder.com/50" alt="Docente" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-semibold">María Fernández</h3>
+                                <p class="text-gray-600 text-sm">Cálculo Multivariable - Grupo 201</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Completado</span>
+                            <button class="ml-3 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-600">4.5/5.0</span>
+                        </div>
+                        <span class="text-xs text-gray-500">Evaluado el 12/03/2024</span>
+                    </div>
+                </div>
+                
+                <!-- Docente pendiente -->
+                <div class="border rounded-lg p-4 hover:shadow-md transition-all">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="flex items-center mb-2 md:mb-0">
+                            <img src="https://via.placeholder.com/50" alt="Docente" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-semibold">Roberto Sánchez</h3>
+                                <p class="text-gray-600 text-sm">Física Mecánica - Grupo 103</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                                Evaluar ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Docente pendiente -->
+                <div class="border rounded-lg p-4 hover:shadow-md transition-all">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="flex items-center mb-2 md:mb-0">
+                            <img src="https://via.placeholder.com/50" alt="Docente" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-semibold">Laura González</h3>
+                                <p class="text-gray-600 text-sm">Ética Profesional - Grupo 401</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                                Evaluar ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Docente pendiente -->
+                <div class="border rounded-lg p-4 hover:shadow-md transition-all">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div class="flex items-center mb-2 md:mb-0">
+                            <img src="https://via.placeholder.com/50" alt="Docente" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h3 class="font-semibold">Carlos Hernández</h3>
+                                <p class="text-gray-600 text-sm">Bases de Datos - Grupo 301</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                                Evaluar ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-semibold mb-2">¿Por qué es importante tu evaluación?</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    Tu retroalimentación nos ayuda a:
+                </p>
+                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
+                    <li>Mejorar la calidad de la enseñanza</li>
+                    <li>Identificar fortalezas y áreas de oportunidad de los docentes</li>
+                    <li>Perfeccionar los métodos pedagógicos</li>
+                    <li>Adaptar el contenido académico a las necesidades de los estudiantes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Credencial de Inscripción</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <!-- Cabecera -->
+    <nav class="bg-black text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center">
+                <a href="../index.html" class="flex items-center">
+                    <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                    <span class="ml-2 font-semibold">Componentes SIA</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 my-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Banner del ITM -->
+            <div class="w-full bg-primary rounded-t-lg p-5 flex items-center justify-center">
+                <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-16">
+            </div>
+            
+            <!-- Credencial -->
+            <div class="bg-white shadow-md rounded-b-lg overflow-hidden">
+                <!-- Encabezado de la credencial -->
+                <div class="p-6 border-b text-center">
+                    <h1 class="text-2xl font-semibold text-gray-700">CREDENCIAL DE INSCRIPCIÓN</h1>
+                    <h2 class="text-lg text-gray-600">INSTITUTO TECNOLÓGICO METROPOLITANO</h2>
+                    <p class="text-sm text-gray-500">Institución Universitaria Adscrita al Municipio de Medellín</p>
+                </div>
+                
+                <!-- Período académico -->
+                <div class="bg-primary text-white text-center py-2 px-4">
+                    <h3 class="font-medium">DATOS DE INSCRIPCIÓN PARA EL PERIODO 2025-1</h3>
+                </div>
+                
+                <!-- Datos personales -->
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-700"><span class="font-medium">Documento: </span>1042854801</p>
+                            <p class="text-gray-700"><span class="font-medium">Apellidos y Nombres: </span>JOSE DAVID DUARTE FUNES</p>
+                            <p class="text-gray-700"><span class="font-medium">Inscripción N°: </span>472108</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-700"><span class="font-medium">Fecha de Inscripción: </span>Octubre 7-2024</p>
+                            <p class="text-gray-700"><span class="font-medium">Tipo de Inscripción: </span>NUEVO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Programas a los que aspira -->
+                <div class="px-6 pb-4">
+                    <h3 class="font-medium text-gray-700 mb-2">Programas a los que aspira:</h3>
+                    <div class="space-y-2">
+                        <div class="border-l-4 border-primary pl-3 py-1">
+                            <p class="text-gray-700"><span class="font-medium">Opción N° 1: </span>DESARROLLO DE SOFTWARE - CAMPUS: FRATERNIDAD MEDELLÍN CALLE 54A N° 30 01</p>
+                        </div>
+                        <div class="border-l-4 border-gray-300 pl-3 py-1">
+                            <p class="text-gray-700"><span class="font-medium">Opción N° 2: </span>SISTEMAS ELECTROMECÁNICOS - CAMPUS: ROBLEDO CALLE 73 No. 76 A 354 - Vía al Volador</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pruebas a presentar -->
+                <div class="bg-primary text-white text-center py-2 px-4">
+                    <h3 class="font-medium">PRUEBAS A PRESENTAR</h3>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+                        <div>
+                            <p class="text-gray-700"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examen Saber 11 verificado</p>
+                            <p class="text-sm text-gray-500 mt-1">Se utilizará tu puntaje del ICFES para el proceso de admisión</p>
+                        </div>
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center">
+                            <i class="fas fa-eye mr-2"></i>Seguimiento de Admisión
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Pie de página y acciones -->
+                <div class="p-6 bg-gray-50 border-t">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-sm text-gray-500 mb-4 md:mb-0">
+                            Esta credencial es el documento oficial que certifica tu inscripción en el ITM.<br>
+                            Conserva esta información para futuros trámites.
+                        </p>
+                        <div class="flex space-x-2">
+                            <button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-gray-50">
+                                <i class="fas fa-download mr-2"></i>Descargar PDF
+                            </button>
+                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                                <i class="fas fa-print mr-2"></i>Imprimir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nota informativa -->
+            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            Para seguimiento de tu proceso de admisión, puedes hacer clic en el botón "Seguimiento de Admisión" 
+                            o ingresar al sistema SIA con tu número de documento y clave de acceso.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
