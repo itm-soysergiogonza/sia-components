@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Biblioteca Virtual Integrada</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <nav class="bg-black text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="flex items-center">
+                    <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                    <span class="ml-2 font-semibold">Biblioteca Virtual</span>
+                </a>
+                <!-- Añadido: Menú de usuario -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 hover:bg-primary-light rounded-full">
+                        <i class="fas fa-bell text-xl"></i>
+                    </button>
+                    <button class="p-2 hover:bg-primary-light rounded-full">
+                        <i class="fas fa-bookmark text-xl"></i>
+                    </button>
+                    <button class="flex items-center space-x-2 p-2 hover:bg-primary-light rounded-lg">
+                        <i class="fas fa-user-circle text-xl"></i>
+                        <span>Mi Cuenta</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4">
+        <!-- Tabs mejorados -->
+        <div class="mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
+                    <button class="border-primary text-primary border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="catalogo-tab">
+                        <i class="fas fa-book-open mr-2"></i>
+                        Catálogo
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="ubicacion-tab">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Ubicación del Material
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="prestamos-tab">
+                        <i class="fas fa-hand-holding mr-2"></i>
+                        Mis Préstamos
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="recursos-digitales-tab">
+                        <i class="fas fa-laptop mr-2"></i>
+                        Recursos Digitales
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="bases-datos-tab">
+                        <i class="fas fa-database mr-2"></i>
+                        Bases de Datos
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="servicios-tab">
+                        <i class="fas fa-concierge-bell mr-2"></i>
+                        Servicios
+                    </button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 py-4 px-1 text-sm font-medium flex items-center whitespace-nowrap" id="eventos-tab">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Eventos
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Panel de Catálogo Mejorado -->
+        <div id="catalogo-panel" class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <h1 class="text-2xl font-bold text-primary mb-4 md:mb-0">Catálogo de Recursos</h1>
+                <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar recursos..." class="pl-10 pr-4 py-2 border rounded-lg w-full md:w-64">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <select class="border rounded-lg px-4 py-2">
+                        <option>Todos los recursos</option>
+                        <option>Libros</option>
+                        <option>Artículos</option>
+                        <option>Tesis</option>
+                        <option>Revistas</option>
+                        <option>Recursos Digitales</option>
+                    </select>
+                    <!-- Filtros adicionales -->
+                    <button class="flex items-center space-x-2 px-4 py-2 border rounded-lg hover:bg-gray-50">
+                        <i class="fas fa-filter"></i>
+                        <span>Filtros</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros expandidos -->
+            <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Área de Conocimiento</label>
+                        <select class="w-full border rounded-lg px-3 py-2">
+                            <option>Todas las áreas</option>
+                            <option>Ingeniería</option>
+                            <option>Ciencias Básicas</option>
+                            <option>Humanidades</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Año de Publicación</label>
+                        <select class="w-full border rounded-lg px-3 py-2">
+                            <option>Todos los años</option>
+                            <option>2024</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Idioma</label>
+                        <select class="w-full border rounded-lg px-3 py-2">
+                            <option>Todos los idiomas</option>
+                            <option>Español</option>
+                            <option>Inglés</option>
+                            <option>Francés</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Disponibilidad</label>
+                        <select class="w-full border rounded-lg px-3 py-2">
+                            <option>Todos</option>
+                            <option>Disponible</option>
+                            <option>En préstamo</option>
+                            <option>Reservado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de recursos mejorada -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Tarjeta de recurso mejorada -->
+                <div class="border rounded-lg p-4 hover:shadow-md transition-all">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 relative">
+                            <img src="../assets/images/book-placeholder.png" alt="Portada del libro" class="w-20 h-28 object-cover rounded">
+                            <span class="absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="ml-4 flex-grow">
+                            <h3 class="font-medium text-gray-900 hover:text-primary cursor-pointer">Fundamentos de Programación</h3>
+                            <p class="text-sm text-gray-600">Luis Joyanes Aguilar</p>
+                            <p class="text-sm text-gray-500 mt-1">2023 • ISBN: 978-84-9035-288-7</p>
+                            <div class="mt-2 flex items-center justify-between">
+                                <span class="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded">Disponible</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 hover:text-primary" title="Agregar a favoritos">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="p-1 hover:text-primary" title="Reservar">
+                                        <i class="far fa-calendar-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más ejemplos de recursos -->
+                <!-- ... similar cards with different content ... -->
+            </div>
+
+            <!-- Paginación -->
+            <div class="mt-6 flex justify-center">
+                <nav class="flex items-center space-x-2">
+                    <button class="px-3 py-2 rounded-lg border hover:bg-gray-50">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="px-3 py-2 rounded-lg border bg-primary text-white">1</button>
+                    <button class="px-3 py-2 rounded-lg border hover:bg-gray-50">2</button>
+                    <button class="px-3 py-2 rounded-lg border hover:bg-gray-50">3</button>
+                    <span class="px-3 py-2">...</span>
+                    <button class="px-3 py-2 rounded-lg border hover:bg-gray-50">10</button>
+                    <button class="px-3 py-2 rounded-lg border hover:bg-gray-50">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Panel de Ubicación Mejorado -->
+        <div id="ubicacion-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Ubicación del Material</h2>
+            
+            <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Primera columna -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="" selected disabled>Seleccione el tipo</option>
+                                <option value="libro">Libro</option>
+                                <option value="revista">Revista</option>
+                                <option value="tesis">Tesis</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Autor</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Código ISBN</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Año de Publicación</label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Segunda columna -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Área de Conocimiento</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Código Interno</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Cantidad</label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ubicación -->
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 hidden" id="ubicacion-result">
+                    <h3 class="text-lg font-medium text-primary mb-2">Ubicación</h3>
+                    <p class="text-gray-600">La ubicación del material se mostrará aquí...</p>
+                </div>
+
+                <!-- Botón de búsqueda -->
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-lg transition-colors duration-200">
+                        <i class="fas fa-search mr-2"></i>
+                        Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Añadir mapa interactivo -->
+            <div class="mt-6 border rounded-lg overflow-hidden">
+                <div class="bg-gray-100 h-64 flex items-center justify-center">
+                    <p class="text-gray-500">Mapa interactivo de la biblioteca</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Préstamos -->
+        <div id="prestamos-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Mis Préstamos</h2>
+            <div class="space-y-4">
+                <!-- Lista de préstamos activos -->
+                <div class="border rounded-lg p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium">Introducción a la Inteligencia Artificial</h3>
+                            <p class="text-sm text-gray-600">Fecha de préstamo: 15/03/2024</p>
+                            <p class="text-sm text-gray-600">Fecha de devolución: 29/03/2024</p>
+                        </div>
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                            Renovar
+                        </button>
+                    </div>
+                </div>
+                <!-- ... más préstamos ... -->
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Reservas -->
+        <div id="reservas-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Mis Reservas</h2>
+            <div class="space-y-4">
+                <!-- Lista de reservas -->
+                <div class="border rounded-lg p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium">Bases de Datos Avanzadas</h3>
+                            <p class="text-sm text-gray-600">Reservado para: 20/03/2024</p>
+                            <span class="inline-block mt-2 px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">Pendiente</span>
+                        </div>
+                        <button class="px-4 py-2 text-red-600 hover:text-red-800">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </div>
+                </div>
+                <!-- ... más reservas ... -->
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Recursos Digitales -->
+        <div id="recursos-digitales-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Recursos Digitales</h2>
+            
+            <!-- Categorías de recursos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- E-Books -->
+                <div class="p-6 border rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-book text-2xl text-primary mr-3"></i>
+                        <h3 class="text-lg font-semibold">E-Books</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Accede a nuestra colección de libros electrónicos</p>
+                    <a href="#" class="text-primary hover:text-primary-dark font-medium">
+                        Ver colección <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Revistas Electrónicas -->
+                <div class="p-6 border rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-newspaper text-2xl text-primary mr-3"></i>
+                        <h3 class="text-lg font-semibold">Revistas Electrónicas</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Publicaciones académicas y científicas</p>
+                    <a href="#" class="text-primary hover:text-primary-dark font-medium">
+                        Explorar revistas <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Tesis Digitales -->
+                <div class="p-6 border rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-graduation-cap text-2xl text-primary mr-3"></i>
+                        <h3 class="text-lg font-semibold">Tesis Digitales</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Repositorio institucional de tesis</p>
+                    <a href="#" class="text-primary hover:text-primary-dark font-medium">
+                        Ver repositorio <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Plataformas de Aprendizaje -->
+            <h3 class="text-xl font-bold text-primary mb-4">Plataformas de Aprendizaje</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <a href="#" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all">
+                    <img src="../assets/images/coursera.png" alt="Coursera" class="h-8 mr-3">
+                    <span class="font-medium">Coursera</span>
+                </a>
+                <a href="#" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all">
+                    <img src="../assets/images/linkedin-learning.png" alt="LinkedIn Learning" class="h-8 mr-3">
+                    <span class="font-medium">LinkedIn Learning</span>
+                </a>
+                <!-- Más plataformas... -->
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Bases de Datos -->
+        <div id="bases-datos-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Bases de Datos Académicas</h2>
+
+            <!-- Buscador de bases de datos -->
+            <div class="mb-6">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar en bases de datos..." class="w-full pl-10 pr-4 py-2 border rounded-lg">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Filtros por área -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button class="px-4 py-2 rounded-full bg-primary text-white text-sm">Todas</button>
+                <button class="px-4 py-2 rounded-full border text-gray-700 text-sm hover:bg-gray-50">Ingeniería</button>
+                <button class="px-4 py-2 rounded-full border text-gray-700 text-sm hover:bg-gray-50">Ciencias</button>
+                <button class="px-4 py-2 rounded-full border text-gray-700 text-sm hover:bg-gray-50">Humanidades</button>
+                <!-- Más filtros... -->
+            </div>
+
+            <!-- Lista de bases de datos -->
+            <div class="space-y-4">
+                <!-- IEEE Xplore -->
+                <div class="border rounded-lg p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">IEEE Xplore</h3>
+                            <p class="text-gray-600 mb-4">Biblioteca digital de IEEE con acceso a publicaciones técnicas en ingeniería eléctrica, computación y electrónica.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Ingeniería</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Texto Completo</span>
+                            </div>
+                        </div>
+                        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                            Acceder
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ScienceDirect -->
+                <div class="border rounded-lg p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">ScienceDirect</h3>
+                            <p class="text-gray-600 mb-4">Base de datos de Elsevier que proporciona acceso a artículos científicos y capítulos de libros.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Multidisciplinaria</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Texto Completo</span>
+                            </div>
+                        </div>
+                        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                            Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Servicios -->
+        <div id="servicios-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Servicios Bibliotecarios</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Préstamo Interbibliotecario -->
+                <div class="border rounded-lg p-6">
+                    <i class="fas fa-exchange-alt text-3xl text-primary mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Préstamo Interbibliotecario</h3>
+                    <p class="text-gray-600 mb-4">Solicita materiales de otras bibliotecas universitarias.</p>
+                    <button class="text-primary hover:text-primary-dark font-medium">
+                        Solicitar servicio <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Asesoría Bibliográfica -->
+                <div class="border rounded-lg p-6">
+                    <i class="fas fa-chalkboard-teacher text-3xl text-primary mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Asesoría Bibliográfica</h3>
+                    <p class="text-gray-600 mb-4">Recibe ayuda para tus investigaciones y citaciones.</p>
+                    <button class="text-primary hover:text-primary-dark font-medium">
+                        Agendar asesoría <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Sala de Estudio -->
+                <div class="border rounded-lg p-6">
+                    <i class="fas fa-door-open text-3xl text-primary mb-4"></i>
+                    <h3 class="text-lg font-semibold mb-2">Reserva de Salas</h3>
+                    <p class="text-gray-600 mb-4">Reserva espacios para estudio individual o grupal.</p>
+                    <button class="text-primary hover:text-primary-dark font-medium">
+                        Reservar sala <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horarios y Contacto -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4">Horarios de Atención</h3>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Lunes a Viernes</span>
+                            <span class="font-medium">7:00 AM - 9:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Sábados</span>
+                            <span class="font-medium">8:00 AM - 6:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Domingos</span>
+                            <span class="font-medium">Cerrado</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span>biblioteca@itm.edu.co</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3"></i>
+                            <span>+57 (604) 440 51 00</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-comment text-primary mr-3"></i>
+                            <span>Chat en línea</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nuevo Panel de Eventos -->
+        <div id="eventos-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-2xl font-bold text-primary mb-6">Eventos y Actividades</h2>
+
+            <!-- Calendario de eventos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Próximos eventos -->
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-xl font-semibold mb-4">Próximos Eventos</h3>
+                    
+                    <!-- Evento -->
+                    <div class="border rounded-lg p-4 hover:shadow-md transition-all">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-16 text-center">
+                                <div class="text-2xl font-bold text-primary">15</div>
+                                <div class="text-sm text-gray-600">MAR</div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Taller de Búsqueda en Bases de Datos</h4>
+                                <p class="text-sm text-gray-600 mt-1">14:00 - 16:00 • Sala de Capacitación</p>
+                                <div class="mt-2">
+                                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                                        Inscribirse <i class="fas fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Más eventos... -->
+                </div>
+
+                <!-- Filtros y categorías -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Categorías</h3>
+                    <div class="space-y-2">
+                        <button class="w-full text-left px-4 py-2 rounded-lg bg-primary text-white">
+                            Todos los eventos
+                        </button>
+                        <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                            Talleres
+                        </button>
+                        <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                            Conferencias
+                        </button>
+                        <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                            Club de lectura
+                        </button>
+                        <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                            Exposiciones
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript mejorado -->
+    <script>
+        // Función para manejar los tabs
+        function setupTabs() {
+            const tabs = ['catalogo', 'ubicacion', 'prestamos', 'recursos-digitales', 'bases-datos', 'servicios', 'eventos'];
+            
+            tabs.forEach(tab => {
+                const button = document.getElementById(`${tab}-tab`);
+                const panel = document.getElementById(`${tab}-panel`);
+                
+                button.addEventListener('click', () => {
+                    // Desactivar todos los tabs
+                    tabs.forEach(t => {
+                        const btn = document.getElementById(`${t}-tab`);
+                        const pnl = document.getElementById(`${t}-panel`);
+                        
+                        btn.classList.remove('border-primary', 'text-primary');
+                        btn.classList.add('border-transparent', 'text-gray-500');
+                        pnl.classList.add('hidden');
+                    });
+                    
+                    // Activar el tab seleccionado
+                    button.classList.add('border-primary', 'text-primary');
+                    button.classList.remove('border-transparent', 'text-gray-500');
+                    panel.classList.remove('hidden');
+                });
+            });
+        }
+
+        // Inicializar la funcionalidad de tabs
+        document.addEventListener('DOMContentLoaded', setupTabs);
+    </script>
+</body>
+</html>
