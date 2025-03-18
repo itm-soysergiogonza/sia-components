@@ -28,6 +28,59 @@
             }
         }
     </script>
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .login-divider {
+            margin: 1.5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .login-divider::before { left: 0; }
+        .login-divider::after { right: 0; }
+
+        .btn-microsoft {
+            width: 100%;
+            background-color: #2F2F2F;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .btn-microsoft:hover {
+            background-color: #1F1F1F;
+        }
+
+        .btn-microsoft img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 font-montserrat">
     <header class="bg-primary px-8 py-4 shadow-md">
@@ -38,69 +91,76 @@
         <h1 class="text-3xl font-bold mb-4 text-gray-800">Login ITM</h1>
         <p class="text-xl text-gray-600 mb-8">Sistema de autenticación consistente con la identidad visual del ITM.</p>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Login Básico</h2>
-            <div class="flex justify-center">
-                <div class="w-full max-w-md bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="flex flex-col items-center bg-primary text-white py-6">
-                        <i class="fas fa-user-circle text-5xl mb-3"></i>
-                        <h3 class="text-xl font-semibold">Iniciar Sesión</h3>
-                    </div>
-                    <form class="p-6">
-                        <div class="mb-4">
-                            <label for="username" class="block text-gray-700 font-medium mb-2 flex items-center">
-                                Usuario
-                                <span class="relative ml-1 group">
-                                    <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
-                                    <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
-                                        Ingresa tu número de documento o correo institucional
-                                    </span>
-                                </span>
-                            </label>
-                            <div class="flex">
-                                <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
-                                    <i class="fas fa-user text-gray-500"></i>
-                                </div>
-                                <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
-                                       id="username" placeholder="Usuario">
-                            </div>
-                        </div>
-                        <div class="mb-6">
-                            <label for="password" class="block text-gray-700 font-medium mb-2 flex items-center">
-                                Contraseña
-                                <span class="relative ml-1 group">
-                                    <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
-                                    <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
-                                        La contraseña debe tener al menos 8 caracteres
-                                    </span>
-                                </span>
-                            </label>
-                            <div class="flex">
-                                <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
-                                    <i class="fas fa-lock text-gray-500"></i>
-                                </div>
-                                <input type="password" class="flex-1 px-4 py-2 border border-l-0 border-r-0 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
-                                       id="password" placeholder="Contraseña">
-                                <button type="button" id="togglePassword" 
-                                        class="px-3 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-600 hover:bg-gray-100 focus:outline-none">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="flex items-center mb-6">
-                            <input type="checkbox" id="rememberMe" class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded">
-                            <label for="rememberMe" class="ml-2 text-gray-700">Recordar sesión</label>
-                        </div>
-                        <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
-                            Ingresar
-                        </button>
-                        <div class="mt-4 text-center">
-                            <a href="#" class="text-primary hover:underline text-sm">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    </form>
-                </div>
+        <div class="login-container">
+            <h2 class="text-center mb-4">Iniciar Sesión</h2>
+            
+            <!-- Botón de Microsoft SSO -->
+            <button id="signInWithMicrosoft" class="btn-microsoft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/512px-Microsoft_logo_%282012%29.svg.png" 
+                     alt="Microsoft logo">
+                Iniciar sesión con Microsoft
+            </button>
+
+            <div class="login-divider">
+                <span>o</span>
             </div>
-        </section>
+
+            <!-- Formulario de login tradicional -->
+            <form id="loginForm" class="p-6">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 font-medium mb-2 flex items-center">
+                        Usuario
+                        <span class="relative ml-1 group">
+                            <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
+                            <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
+                                Ingresa tu número de documento o correo institucional
+                            </span>
+                        </span>
+                    </label>
+                    <div class="flex">
+                        <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
+                            <i class="fas fa-user text-gray-500"></i>
+                        </div>
+                        <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+                               id="username" placeholder="Usuario">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 font-medium mb-2 flex items-center">
+                        Contraseña
+                        <span class="relative ml-1 group">
+                            <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
+                            <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
+                                La contraseña debe tener al menos 8 caracteres
+                            </span>
+                        </span>
+                    </label>
+                    <div class="flex">
+                        <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
+                            <i class="fas fa-lock text-gray-500"></i>
+                        </div>
+                        <input type="password" class="flex-1 px-4 py-2 border border-l-0 border-r-0 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+                               id="password" placeholder="Contraseña">
+                        <button type="button" id="togglePassword" 
+                                class="px-3 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-600 hover:bg-gray-100 focus:outline-none">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center mb-6">
+                    <input type="checkbox" id="rememberMe" class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded">
+                    <label for="rememberMe" class="ml-2 text-gray-700">Recordar sesión</label>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
+                        Ingresar
+                    </button>
+                    <div class="mt-4 text-center">
+                        <a href="#" class="text-primary hover:underline text-sm">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </main>
 
     <script src="index.js"></script>
