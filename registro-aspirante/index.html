@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Registro de Aspirante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#002B7F',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="min-h-screen">
+        <!-- Contenedor principal -->
+        <div class="max-w-5xl mx-auto p-6 space-y-6">
+            <!-- Sección de identificación -->
+            <div class="bg-white rounded-lg shadow-sm p-8">
+                <h2 class="text-xl font-medium text-gray-800 mb-6">Información de Identificación</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                    <!-- Columna izquierda: Tipo y número de documento -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">
+                                    Tipo de Documento <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <select 
+                                        id="tipoDocumento"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white"
+                                    >
+                                        <option value="" disabled selected>Seleccione tipo</option>
+                                        <option value="CC">Cédula de Ciudadanía</option>
+                                        <option value="CE">Cédula de Extranjería</option>
+                                        <option value="TI">Tarjeta de Identidad</option>
+                                        <option value="PS">Pasaporte</option>
+                                        <option value="PEP">Permiso Especial</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">
+                                    Número de Documento <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input 
+                                        type="text" 
+                                        id="identificacion"
+                                        placeholder="Ingrese su número"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    >
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-3">
+                                        <span class="text-sm text-gray-400" id="documentLength">0/10</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha: Correo electrónico -->
+                    <div class="lg:col-span-5">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">
+                            Correo Electrónico <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <input 
+                                type="email" 
+                                id="correoElectronico"
+                                placeholder="correo@ejemplo.com"
+                                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                            >
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">Recibirás un correo de confirmación</p>
+                    </div>
+                </div>
+
+                <!-- Botón de verificación -->
+                <div class="flex justify-end items-center gap-4">
+                    <span id="validationMessage" class="text-sm"></span>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-md flex items-center gap-2 transition-colors">
+                        Verificar
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sección de modalidad -->
+            <div class="bg-white rounded-lg shadow-sm p-8">
+                <h2 class="text-xl font-medium mb-6">Seleccione Modalidad</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <button class="modalidad-btn p-6 text-center border-2 border-primary bg-primary text-white rounded-md font-medium transition-colors">
+                        PREGRADO
+                    </button>
+                    <button class="modalidad-btn p-6 text-center border-2 border-gray-200 text-gray-700 rounded-md font-medium hover:border-primary hover:text-primary transition-colors">
+                        POSTGRADO
+                    </button>
+                </div>
+                <div class="space-y-2 text-gray-600 italic">
+                    <p class="hidden pregrado-desc">
+                        <span class="font-medium text-primary">Pregrado:</span> Son los programas académicos que se cursan después de finalizar el bachillerato. Incluyen tecnologías, ingenierías y otros programas profesionales de formación universitaria inicial.
+                    </p>
+                    <p class="hidden postgrado-desc">
+                        <span class="font-medium text-primary">Postgrado:</span> Son los programas de especialización, maestría o doctorado que requieren haber completado previamente un programa de pregrado.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tipo de inscripción -->
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <label class="font-medium min-w-[150px]">Tipo de Inscripción</label>
+                    <select id="tipoInscripcion" class="flex-1 px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="" selected disabled>Seleccione el tipo de inscripción</option>
+                        <option value="nuevo">NUEVO</option>
+                        <option value="nuevo_barrio">NUEVO UNIVERSIDAD EN MI BARRIO</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Documentos requeridos -->
+            <div class="bg-blue-50 rounded-lg p-6">
+                <h3 class="text-primary font-medium mb-4">¡Recuerda tener los siguiente documentos a la mano!</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                        Cédula de Ciudadanía
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                        Pruebas de estado (Icdes/SaberT1/otros)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                        Diploma de Grado
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                        Recibo de Servicios
+                    </li>
+                </ul>
+                <p class="text-sm text-gray-600 mt-4">
+                    Todos los documentos deben estar en formato PDF individual
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manejo de selección de modalidad
+        const modalidadBtns = document.querySelectorAll('.modalidad-btn');
+        modalidadBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modalidadBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white');
+                    b.classList.add('border-gray-200', 'text-gray-700');
+                });
+                btn.classList.remove('border-gray-200', 'text-gray-700');
+                btn.classList.add('bg-primary', 'text-white');
+            });
+        });
+
+        // Validación de tipo de documento y número de identificación
+        const tipoDocumentoSelect = document.getElementById('tipoDocumento');
+        const identificacionInput = document.getElementById('identificacion');
+        const documentLengthSpan = document.getElementById('documentLength');
+        const validationMessage = document.getElementById('validationMessage');
+
+        tipoDocumentoSelect.addEventListener('change', () => {
+            const tipoDoc = tipoDocumentoSelect.value;
+            let maxLength;
+            
+            // Ajustar la validación según el tipo de documento
+            switch(tipoDoc) {
+                case 'CC':
+                case 'CE':
+                    maxLength = 10;
+                    break;
+                case 'TI':
+                    maxLength = 11;
+                    break;
+                case 'PS':
+                case 'PEP':
+                    maxLength = 15;
+                    break;
+                default:
+                    maxLength = 10;
+            }
+            
+            identificacionInput.maxLength = maxLength;
+            documentLengthSpan.textContent = `${identificacionInput.value.length}/${maxLength}`;
+            
+            // Trigger validación
+            identificacionInput.dispatchEvent(new Event('input'));
+        });
+
+        identificacionInput.addEventListener('input', (e) => {
+            // Permitir solo números
+            e.target.value = e.target.value.replace(/\D/g, '');
+            
+            // Respetar el maxLength establecido por el tipo de documento
+            const maxLength = e.target.maxLength || 10;
+            if (e.target.value.length > maxLength) {
+                e.target.value = e.target.value.slice(0, maxLength);
+            }
+            
+            // Actualizar contador
+            documentLengthSpan.textContent = `${e.target.value.length}/${maxLength}`;
+            
+            // Validación visual
+            if (e.target.value.length === 0) {
+                e.target.classList.remove('border-red-500', 'border-green-500');
+                validationMessage.textContent = '';
+                validationMessage.classList.remove('text-red-500', 'text-green-500');
+            } else if (e.target.value.length < maxLength) {
+                e.target.classList.add('border-red-500');
+                e.target.classList.remove('border-green-500');
+                validationMessage.textContent = 'Documento incompleto';
+                validationMessage.classList.add('text-red-500');
+                validationMessage.classList.remove('text-green-500');
+            } else {
+                e.target.classList.remove('border-red-500');
+                e.target.classList.add('border-green-500');
+                validationMessage.textContent = 'Documento válido';
+                validationMessage.classList.remove('text-red-500');
+                validationMessage.classList.add('text-green-500');
+            }
+        });
+
+        // Validación de correo electrónico
+        const emailInput = document.getElementById('correoElectronico');
+        emailInput.addEventListener('blur', () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                emailInput.classList.add('border-red-500');
+                emailInput.classList.remove('border-green-500');
+            } else {
+                emailInput.classList.remove('border-red-500');
+                emailInput.classList.add('border-green-500');
+            }
+        });
+
+        // Manejo del tipo de inscripción
+        const tipoInscripcionSelect = document.getElementById('tipoInscripcion');
+        tipoInscripcionSelect.addEventListener('change', (e) => {
+            // Aquí puedes agregar la lógica para manejar el cambio de tipo de inscripción
+            console.log('Tipo de inscripción seleccionado:', e.target.value);
+        });
+
+        // Manejo de descripciones de modalidad
+        const pregradoDesc = document.querySelector('.pregrado-desc');
+        const postgradoDesc = document.querySelector('.postgrado-desc');
+        
+        modalidadBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Código existente de selección...
+                
+                // Mostrar descripción correspondiente
+                const isPostgrado = btn.textContent.trim() === 'POSTGRADO';
+                pregradoDesc.classList.toggle('hidden', isPostgrado);
+                postgradoDesc.classList.toggle('hidden', !isPostgrado);
+                
+                // Mostrar descripción inicial de pregrado
+                if (!isPostgrado) {
+                    pregradoDesc.classList.remove('hidden');
+                    postgradoDesc.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mostrar descripción de pregrado por defecto
+        pregradoDesc.classList.remove('hidden');
+    </script>
+</body>
+</html>

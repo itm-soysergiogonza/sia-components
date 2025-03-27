@@ -1,53 +1,62 @@
 // Importar MSAL
 import * as msal from "@azure/msal-browser";
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Manejar el botón de mostrar/ocultar contraseña
-    const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('password');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const passwordInput = form.querySelector('input[type="password"]');
+    const togglePassword = passwordInput.nextElementSibling;
 
-    if (togglePassword && password) {
-        togglePassword.addEventListener('click', function() {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            
-            // Cambiar el ícono
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
-    }
+    // Toggle password visibility
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Update icon
+        const svg = togglePassword.querySelector('svg');
+        if (type === 'password') {
+            svg.style.opacity = '1';
+        } else {
+            svg.style.opacity = '0.7';
+        }
+    });
 
-    // Manejar el formulario de login
-    const loginForm = document.querySelector('form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Aquí iría la lógica de validación y envío del formulario
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const userData = {
+            tipo_usuario: document.querySelector('input[name="tipo_usuario"]:checked').value,
+            usuario: formData.get('usuario'),
+            password: formData.get('password'),
+            remember: formData.get('remember-me') === 'on'
+        };
 
-            // Ejemplo de validación básica
-            if (!username || !password) {
-                alert('Por favor complete todos los campos');
-                return;
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (response.ok) {
+                window.location.href = '/dashboard';
+            } else {
+                throw new Error('Error en la autenticación');
             }
+        } catch (error) {
+            console.error('Error:', error);
+            // Aquí puedes mostrar un mensaje de error al usuario
+        }
+    });
 
-            // Aquí se enviaría la información al servidor
-            console.log('Datos del formulario:', { username, password, rememberMe });
-        });
-    }
-
-    // Manejar botones de redes sociales
-    const socialButtons = document.querySelectorAll('.social-login .btn');
-    socialButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Aquí iría la lógica de autenticación con redes sociales
-            console.log('Iniciando sesión con:', this.textContent.trim());
-        });
+    // Microsoft login button
+    const microsoftButton = form.querySelector('button[type="button"]');
+    microsoftButton.addEventListener('click', () => {
+        // Implementar la lógica de autenticación con Microsoft
+        window.location.href = '/auth/microsoft';
     });
 
     // Configuración de MSAL
@@ -126,6 +135,29 @@ document.addEventListener('DOMContentLoaded', function() {
         // Botón de Microsoft SSO
         document.getElementById('signInWithMicrosoft').addEventListener('click', signInWithMicrosoft);
 
-        // ... existing event listeners ...
+        // Manejar cambio de tipo de usuario
+        const radioButtons = document.querySelectorAll('input[name="tipo_usuario"]');
+        const usuarioLabel = document.getElementById('usuario_label');
+        const usuarioInput = document.getElementById('usuario');
+
+        function updatePlaceholder(value) {
+            if (value === 'estudiante') {
+                usuarioLabel.textContent = 'Documento o Usuario';
+                usuarioInput.placeholder = 'Ingresa tu documento o usuario';
+            } else {
+                usuarioLabel.textContent = 'Correo Institucional';
+                usuarioInput.placeholder = 'Ingresa tu correo institucional';
+            }
+        }
+
+        // Inicializar con el valor por defecto
+        updatePlaceholder('estudiante');
+
+        // Escuchar cambios en los radio buttons
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                updatePlaceholder(e.target.value);
+            });
+        });
     });
 }); 

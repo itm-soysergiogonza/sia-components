@@ -2,22 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login ITM - Componentes</title>
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Inicio de Sesión</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         montserrat: ['Montserrat', 'sans-serif'],
                     },
                     colors: {
+                        institutional: {
+                            blue: '#011C5B',    // Color principal institucional
+                            gray: '#1D1D1B',    // Gray-3
+                            black: '#000000'     // Black
+                        },
                         primary: {
                             DEFAULT: '#011C5B',
                             dark: '#001440',
@@ -28,141 +30,185 @@
             }
         }
     </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .login-container {
-            max-width: 400px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background: white;
+        .tab-active {
+            @apply text-institutional-blue border-institutional-blue;
         }
-
-        .login-divider {
-            margin: 1.5rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .login-divider::before,
-        .login-divider::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: #ddd;
-        }
-
-        .login-divider::before { left: 0; }
-        .login-divider::after { right: 0; }
-
-        .btn-microsoft {
-            width: 100%;
-            background-color: #2F2F2F;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-
-        .btn-microsoft:hover {
-            background-color: #1F1F1F;
-        }
-
-        .btn-microsoft img {
-            width: 20px;
-            height: 20px;
+        .tab-indicator {
+            @apply absolute bottom-0 left-0 h-0.5 bg-institutional-blue transition-all duration-300;
         }
     </style>
 </head>
 <body class="bg-gray-100 font-montserrat">
-    <header class="bg-primary px-8 py-4 shadow-md">
-        <img src="../forms/assets/itm-logo.png" alt="ITM Logo" class="h-10">
-    </header>
-
-    <main class="container mx-auto px-4 mt-8">
-        <h1 class="text-3xl font-bold mb-4 text-gray-800">Login ITM</h1>
-        <p class="text-xl text-gray-600 mb-8">Sistema de autenticación consistente con la identidad visual del ITM.</p>
-
-        <div class="login-container">
-            <h2 class="text-center mb-4">Iniciar Sesión</h2>
-            
-            <!-- Botón de Microsoft SSO -->
-            <button id="signInWithMicrosoft" class="btn-microsoft">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/512px-Microsoft_logo_%282012%29.svg.png" 
-                     alt="Microsoft logo">
-                Iniciar sesión con Microsoft
-            </button>
-
-            <div class="login-divider">
-                <span>o</span>
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-[440px] bg-white rounded-lg shadow-lg">
+            <!-- Tabs de selección de tipo de usuario -->
+            <div class="relative border-b">
+                <div class="flex">
+                    <div class="w-1/2">
+                        <input 
+                            type="radio" 
+                            id="estudiante" 
+                            name="tipo_usuario" 
+                            value="estudiante" 
+                            class="hidden peer" 
+                            checked
+                        >
+                        <label 
+                            for="estudiante" 
+                            class="flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium text-gray-500 cursor-pointer border-b-2 border-transparent hover:text-institutional-blue transition-colors peer-checked:tab-active"
+                        >
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Estudiante/Aspirante</span>
+                        </label>
+                    </div>
+                    <div class="w-1/2">
+                        <input 
+                            type="radio" 
+                            id="empleado" 
+                            name="tipo_usuario" 
+                            value="empleado" 
+                            class="hidden peer"
+                        >
+                        <label 
+                            for="empleado" 
+                            class="flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium text-gray-500 cursor-pointer border-b-2 border-transparent hover:text-institutional-blue transition-colors peer-checked:tab-active"
+                        >
+                            <i class="fas fa-id-card"></i>
+                            <span>Empleado/Contratista</span>
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <!-- Formulario de login tradicional -->
-            <form id="loginForm" class="p-6">
-                <div class="mb-4">
-                    <label for="username" class="block text-gray-700 font-medium mb-2 flex items-center">
-                        Usuario
-                        <span class="relative ml-1 group">
-                            <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
-                            <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
-                                Ingresa tu número de documento o correo institucional
-                            </span>
-                        </span>
-                    </label>
-                    <div class="flex">
-                        <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
-                            <i class="fas fa-user text-gray-500"></i>
-                        </div>
-                        <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
-                               id="username" placeholder="Usuario">
-                    </div>
+            <!-- Contenido del formulario -->
+            <div class="p-8">
+                <!-- Logo ITM -->
+                <div class="flex justify-center mb-8">
+                    <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" class="h-14 dark:hidden">
+                    <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-14 hidden dark:block">
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 font-medium mb-2 flex items-center">
-                        Contraseña
-                        <span class="relative ml-1 group">
-                            <i class="fas fa-question-circle text-gray-400 cursor-help"></i>
-                            <span class="absolute left-full ml-2 top-0 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 hidden group-hover:block z-10">
-                                La contraseña debe tener al menos 8 caracteres
+
+                <!-- Títulos -->
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-institutional-blue mb-1">Bienvenido</h2>
+                    <p class="text-gray-600 text-sm">Iniciar sesión en tu cuenta</p>
+                </div>
+
+                <!-- Formulario -->
+                <form class="space-y-6">
+                    <!-- Campo Usuario -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">
+                            <span id="usuario_label">Usuario</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                <i class="fas fa-user"></i>
                             </span>
-                        </span>
-                    </label>
-                    <div class="flex">
-                        <div class="bg-gray-100 px-3 border border-r-0 border-gray-300 rounded-l-md flex items-center">
-                            <i class="fas fa-lock text-gray-500"></i>
+                            <input 
+                                type="text" 
+                                id="usuario"
+                                name="usuario" 
+                                placeholder="Documento o Correo Institucional"
+                                class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-institutional-blue focus:border-transparent"
+                            >
                         </div>
-                        <input type="password" class="flex-1 px-4 py-2 border border-l-0 border-r-0 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
-                               id="password" placeholder="Contraseña">
-                        <button type="button" id="togglePassword" 
-                                class="px-3 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-600 hover:bg-gray-100 focus:outline-none">
-                            <i class="fas fa-eye"></i>
+                    </div>
+
+                    <!-- Campo Contraseña -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input 
+                                type="password"
+                                class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-institutional-blue focus:border-transparent"
+                            >
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember me y Forgot password -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="remember"
+                                class="h-4 w-4 text-institutional-blue border-gray-300 rounded focus:ring-institutional-blue"
+                            >
+                            <label for="remember" class="ml-2 text-sm text-gray-600">
+                                Recordarme
+                            </label>
+                        </div>
+                        <a href="#" class="text-sm text-institutional-blue hover:text-primary-light">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="space-y-3 pt-2">
+                        <button 
+                            type="submit"
+                            class="w-full bg-institutional-blue text-white rounded-md py-2.5 text-sm font-medium hover:bg-primary-light transition-colors flex items-center justify-center"
+                        >
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Iniciar Sesión
+                        </button>
+                        
+                        <button 
+                            type="button"
+                            class="w-full bg-white border border-gray-300 rounded-md py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                        >
+                            <i class="fab fa-microsoft text-lg"></i>
+                            Iniciar Sesión con Microsoft
                         </button>
                     </div>
-                </div>
-                <div class="flex items-center mb-6">
-                    <input type="checkbox" id="rememberMe" class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded">
-                    <label for="rememberMe" class="ml-2 text-gray-700">Recordar sesión</label>
-                </div>
-                <div class="login-buttons">
-                    <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
-                        Ingresar
-                    </button>
-                    <div class="mt-4 text-center">
-                        <a href="#" class="text-primary hover:underline text-sm">¿Olvidaste tu contraseña?</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </main>
+                </form>
 
-    <script src="index.js"></script>
+                <!-- Register link -->
+                <div class="mt-6 text-center text-sm">
+                    <span class="text-gray-600">¿No tienes una cuenta? </span>
+                    <a href="#" class="text-institutional-blue hover:text-primary-light font-medium">
+                        Regístrate aquí
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const radioButtons = document.querySelectorAll('input[name="tipo_usuario"]');
+            const usuarioLabel = document.getElementById('usuario_label');
+            const usuarioInput = document.getElementById('usuario');
+
+            function updatePlaceholder(value) {
+                if (value === 'estudiante') {
+                    usuarioLabel.textContent = 'Documento o Usuario';
+                    usuarioInput.placeholder = 'Ingresa tu documento o usuario';
+                } else {
+                    usuarioLabel.textContent = 'Correo Institucional';
+                    usuarioInput.placeholder = 'Ingresa tu correo institucional';
+                }
+            }
+
+            // Inicializar con el valor por defecto
+            updatePlaceholder('estudiante');
+
+            // Escuchar cambios en los radio buttons
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    updatePlaceholder(e.target.value);
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

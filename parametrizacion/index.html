@@ -346,20 +346,162 @@
                 </div>
             </div>
             
-            <!-- Acciones -->
-            <div class="flex justify-between">
-                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
-                    <i class="fas fa-question-circle mr-2"></i>Ayuda
-                </button>
-                <div class="flex space-x-3">
-                    <button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-gray-50">
-                        <i class="fas fa-undo mr-2"></i>Restaurar valores predeterminados
-                    </button>
-                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
-                        <i class="fas fa-save mr-2"></i>Guardar cambios
+            <!-- Nueva tabla de pruebas -->
+            <div class="mt-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-primary">Configuración de Programas y Pruebas</h2>
+                    <button id="saveChanges" disabled class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                        <i class="fas fa-save mr-2"></i>Guardar Cambios
                     </button>
                 </div>
-            </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse bg-white">
+                        <thead>
+                            <tr class="bg-primary text-white">
+                                <th class="p-4 text-left border">Programa</th>
+                                <th class="p-4 text-left border">Tipo de Inscripción</th>
+                                <th class="p-4 text-left border">Jornada</th>
+                                <th class="p-4 text-left border">Campus</th>
+                                <th class="p-4 text-center border">Cupos</th>
+                                <th class="p-4 text-center border">Derecho de Inscripción</th>
+                                <th class="p-4 text-left border">Pruebas</th>
+                                <th class="p-4 text-center border">Peso</th>
+                                <th class="p-4 text-center border">Activar Inscripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 border">DESARROLLO DE SOFTWARE</td>
+                                <td class="p-4 border">NUEVO</td>
+                                <td class="p-4 border">UNICA</td>
+                                <td class="p-4 border">ROBLEDO</td>
+                                <td class="p-4 border text-center">50</td>
+                                <td class="p-4 border text-center">
+                                    <div class="inscription-fee-container">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <span class="inscription-no text-red-600 font-medium cursor-pointer" onclick="toggleInscriptionFee(this)">NO</span>
+                                            <div class="inscription-input hidden">
+                                                <div class="flex items-center justify-center gap-1">
+                                                    <span class="text-gray-600">$</span>
+                                                    <input type="number" 
+                                                        value="0" 
+                                                        class="w-24 text-center border rounded-lg px-2 py-1"
+                                                        min="0"
+                                                        step="1000"
+                                                        onchange="handleInscriptionFeeChange(this)"
+                                                        onblur="toggleInscriptionToText(this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 border">
+                                    <div class="flex flex-col gap-2" id="selectedTests1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex-grow">
+                                                ICFES
+                                            </span>
+                                            <div class="flex items-center gap-1">
+                                                <div class="peso-container">
+                                                    <span class="peso-text text-sm font-medium cursor-pointer" onclick="togglePesoToInput(this)">0%</span>
+                                                    <div class="peso-input-container hidden">
+                                                        <input type="number" 
+                                                            min="0" 
+                                                            max="100" 
+                                                            value="0"
+                                                            class="w-16 text-center border rounded-lg px-2 py-1 text-sm"
+                                                            onchange="updateTotalPeso('${containerId}')"
+                                                            onblur="togglePesoToText(this)"
+                                                            data-test-peso>
+                                                        <span class="text-sm text-gray-600">%</span>
+                                                    </div>
+                                                </div>
+                                                <button onclick="removeTest('icfes', 'selectedTests1')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                                    <i class="fas fa-times"></i>
+                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <select onchange="addTest(this, 'selectedTests1')" class="w-full border rounded-lg px-4 py-2">
+                                            <option value="">Seleccione una prueba...</option>
+                                            <option value="icfes">ICFES</option>
+                                            <option value="entrevista">ENTREVISTA</option>
+                                            <option value="aptitudarte">APTITUD ARTE</option>
+                                            <option value="hojavida">HOJA DE VIDA</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="p-4 border text-center">
+                                    <span data-peso-total class="text-green-600">100%</span>
+                                </td>
+                                <td class="p-4 border text-center">
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 border">DESARROLLO DE SOFTWARE</td>
+                                <td class="p-4 border">REINGRESO</td>
+                                <td class="p-4 border">UNICA</td>
+                                <td class="p-4 border">ROBLEDO</td>
+                                <td class="p-4 border text-center">10</td>
+                                <td class="p-4 border text-center">
+                                    <div class="inscription-fee-container">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <span class="inscription-no text-red-600 font-medium cursor-pointer" onclick="toggleInscriptionFee(this)">NO</span>
+                                            <div class="inscription-input hidden">
+                                                <div class="flex items-center justify-center gap-1">
+                                                    <span class="text-gray-600">$</span>
+                                                    <input type="number" 
+                                                        value="0" 
+                                                        class="w-24 text-center border rounded-lg px-2 py-1"
+                                                        min="0"
+                                                        step="1000"
+                                                        onchange="handleInscriptionFeeChange(this)"
+                                                        onblur="toggleInscriptionToText(this)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 border">
+                                    <div class="flex flex-wrap gap-2" id="selectedTests2">
+                                        <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                                            ICFES
+                                            <button onclick="removeTest('icfes', 'selectedTests2')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                                <i class="fas fa-times"></i>
+                                </button>
+                                        </span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                                            ENTREVISTA
+                                            <button onclick="removeTest('entrevista', 'selectedTests2')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                                <i class="fas fa-times"></i>
+                                </button>
+                                        </span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <select onchange="addTest(this, 'selectedTests2')" class="w-full border rounded-lg px-4 py-2">
+                                            <option value="">Seleccione una prueba...</option>
+                                            <option value="icfes">ICFES</option>
+                                            <option value="entrevista">ENTREVISTA</option>
+                                            <option value="aptitudarte">APTITUD ARTE</option>
+                                            <option value="hojavida">HOJA DE VIDA</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="p-4 border text-center">70%<br>30%</td>
+                                <td class="p-4 border text-center">
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
         </div>
     </div>
     
@@ -430,286 +572,263 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Toggle para el historial
-            const toggleBtn = document.getElementById('toggleHistory');
-            const historyContent = document.getElementById('historyContent');
+        let hasChanges = false;
+        const saveButton = document.getElementById('saveChanges');
+
+        function updateSaveButton() {
+            if (hasChanges) {
+                saveButton.disabled = false;
+                saveButton.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                saveButton.classList.add('bg-primary', 'text-white', 'hover:bg-primary-dark');
+            } else {
+                saveButton.disabled = true;
+                saveButton.classList.remove('bg-primary', 'text-white', 'hover:bg-primary-dark');
+                saveButton.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+            }
+        }
+
+        function addTest(select, containerId) {
+            const selectedValue = select.value;
+            const selectedText = select.options[select.selectedIndex].text;
+            const container = document.getElementById(containerId);
+            const row = container.closest('tr');
+            const pesoCell = row.querySelector('[data-peso-total]');
             
-            toggleBtn.addEventListener('click', function() {
-                historyContent.classList.toggle('hidden');
-                const icon = toggleBtn.querySelector('i');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
-            });
-            
-            // Configuración del gráfico de barras
-            const barCtx = document.getElementById('barChart').getContext('2d');
-            const barChart = new Chart(barCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Matemáticas', 'Lectura crítica', 'Sociales', 'C. Naturales', 'Inglés'],
-                    datasets: [
-                        {
-                            label: 'Ciencias económicas',
-                            data: [2, 4, 2, 1, 1],
-                            backgroundColor: 'rgba(1, 28, 91, 0.7)',
-                        },
-                        {
-                            label: 'Ingenierías',
-                            data: [4, 3, 1, 1, 1],
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                        },
-                        {
-                            label: 'Ciencias de la salud',
-                            data: [3, 3, 2, 1, 1],
-                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                        },
-                        {
-                            label: 'Ciencias humanas',
-                            data: [1, 4, 4, 1, 1],
-                            backgroundColor: 'rgba(255, 159, 64, 0.7)',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Comparativa de ponderaciones'
-                        },
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 5
-                        }
-                    }
-                }
-            });
-            
-            // Configuración del gráfico de radar
-            const radarCtx = document.getElementById('radarChart').getContext('2d');
-            const radarChart = new Chart(radarCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['Matemáticas', 'Lectura crítica', 'Sociales', 'C. Naturales', 'Inglés'],
-                    datasets: [
-                        {
-                            label: 'Ciencias económicas',
-                            data: [2, 4, 2, 1, 1],
-                            borderColor: 'rgba(1, 28, 91, 1)',
-                            backgroundColor: 'rgba(1, 28, 91, 0.2)',
-                        },
-                        {
-                            label: 'Ingenierías',
-                            data: [4, 3, 1, 1, 1],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        },
-                        {
-                            label: 'Ciencias de la salud',
-                            data: [3, 3, 2, 1, 1],
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        },
-                        {
-                            label: 'Ciencias humanas',
-                            data: [1, 4, 4, 1, 1],
-                            borderColor: 'rgba(255, 159, 64, 1)',
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Perfil de ponderación por área'
-                        }
-                    },
-                    scales: {
-                        r: {
-                            min: 0,
-                            max: 5,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
-            
-            <!-- Visualización gráfica -->
-            <div class="bg-white border rounded-lg p-4 mb-6">
-                <h3 class="text-lg font-semibold mb-4 text-primary">Visualización de Ponderaciones</h3>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <canvas id="barChart" height="250"></canvas>
-                    </div>
-                    <div>
-                        <canvas id="radarChart" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Fórmula de cálculo -->
-            <div class="bg-blue-50 p-4 rounded-lg mb-6">
-                <h3 class="font-semibold mb-2 text-primary">Fórmula de cálculo</h3>
-                <p class="text-gray-700 mb-2">El puntaje ponderado se calcula según la siguiente fórmula:</p>
-                <div class="bg-white p-3 rounded border text-center text-lg">
-                    <span>Puntaje ponderado = Σ P<sub>i</sub> × W<sub>j</sub></span>
-                </div>
-                <p class="text-sm text-gray-600 mt-2">Donde P<sub>i</sub> es el puntaje en cada prueba y W<sub>j</sub> es el factor de ponderación según el tipo de programa.</p>
-            </div>
-            
-            <!-- Simulador -->
-            <div class="border rounded-lg p-4 mb-6">
-                <h3 class="font-semibold mb-4 text-primary">Simulador de puntaje</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Programa académico</label>
-                        <select class="w-full border rounded-lg px-4 py-2">
-                            <option>Ingeniería de Sistemas</option>
-                            <option>Administración de Empresas</option>
-                            <option>Diseño Industrial</option>
-                            <option>Ingeniería Civil</option>
-                            <option>Medicina</option>
-                            <option>Psicología</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de ponderación</label>
-                        <select class="w-full border rounded-lg px-4 py-2">
-                            <option>Ciencias exactas, ingeniería o tecnologías</option>
-                            <option>Ciencias económicas y Artes no ingenierías</option>
-                            <option>Ciencias de la salud</option>
-                            <option>Ciencias humanas y sociales</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Matemáticas</label>
-                        <input type="number" value="65" min="0" max="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Lectura crítica</label>
-                        <input type="number" value="70" min="0" max="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Sociales</label>
-                        <input type="number" value="60" min="0" max="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">C. Naturales</label>
-                        <input type="number" value="75" min="0" max="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Inglés</label>
-                        <input type="number" value="80" min="0" max="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                </div>
-                
-                <div class="flex justify-center mb-4">
-                    <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
-                        Calcular puntaje
-                    </button>
-                </div>
-                
-                <!-- Resultado detallado -->
-                <div class="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-gray-700 mb-2">Puntaje ponderado:</p>
-                            <p class="text-3xl font-bold text-primary">69.5</p>
-                            <p class="text-green-600 mt-1">Por encima del punto de corte (65.0)</p>
+            if (selectedValue && !Array.from(container.children).some(child => child.textContent.includes(selectedText))) {
+                hasChanges = true;
+                updateSaveButton();
+                const tag = document.createElement('div');
+                tag.className = 'flex items-center gap-2 mb-2';
+                tag.innerHTML = `
+                    <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex-grow">
+                        ${selectedText}
+                    </span>
+                    <div class="flex items-center gap-1">
+                        <div class="peso-container">
+                            <span class="peso-text text-sm font-medium cursor-pointer" onclick="togglePesoToInput(this)">0%</span>
+                            <div class="peso-input-container hidden">
+                                <input type="number" 
+                                    min="0" 
+                                    max="100" 
+                                    value="0"
+                                    class="w-16 text-center border rounded-lg px-2 py-1 text-sm"
+                                    onchange="updateTotalPeso('${containerId}')"
+                                    onblur="togglePesoToText(this)"
+                                    data-test-peso>
+                                <span class="text-sm text-gray-600">%</span>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-gray-700 mb-2">Desglose de cálculo:</p>
-                            <ul class="text-sm text-gray-600 space-y-1">
-                                <li>Matemáticas: 65 × 4 = 260 puntos</li>
-                                <li>Lectura crítica: 70 × 3 = 210 puntos</li>
-                                <li>Sociales: 60 × 1 = 60 puntos</li>
-                                <li>Ciencias Naturales: 75 × 1 = 75 puntos</li>
-                                <li>Inglés: 80 × 1 = 80 puntos</li>
-                                <li>Total: 685 / 10 = 68.5</li>
-                            </ul>
-                        </div>
+                        <button onclick="removeTest('${selectedValue}', '${containerId}')" class="ml-2 text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                </div>
-            </div>
+                `;
+                container.appendChild(tag);
+                select.value = '';
+                updateTotalPeso(containerId);
+            }
+        }
+
+        function removeTest(value, containerId) {
+            hasChanges = true;
+            updateSaveButton();
+            const container = document.getElementById(containerId);
+            const tags = container.getElementsByTagName('div');
+            for (let tag of tags) {
+                if (tag.textContent.includes(value)) {
+                    tag.remove();
+                    updateTotalPeso(containerId);
+                    break;
+                }
+            }
+        }
+
+        function updateTotalPeso(containerId) {
+            hasChanges = true;
+            updateSaveButton();
+            const container = document.getElementById(containerId);
+            const row = container.closest('tr');
+            const pesoCell = row.querySelector('[data-peso-total]');
+            const inputs = container.querySelectorAll('[data-test-peso]');
+            let total = 0;
+
+            inputs.forEach(input => {
+                total += parseInt(input.value) || 0;
+            });
+
+            // Actualizar el total y cambiar el color según si suma 100%
+            pesoCell.textContent = total + '%';
+            if (total === 100) {
+                pesoCell.classList.remove('text-red-600');
+                pesoCell.classList.add('text-green-600');
+            } else {
+                pesoCell.classList.remove('text-green-600');
+                pesoCell.classList.add('text-red-600');
+            }
+        }
+
+        function handleInscriptionFeeChange(input) {
+            hasChanges = true;
+            updateSaveButton();
+            const container = input.closest('.inscription-fee-container');
+            const value = parseInt(input.value) || 0;
             
-            <!-- Puntos de corte por programa -->
-            <div class="border rounded-lg p-4 mb-6">
-                <h3 class="font-semibold mb-4 text-primary">Puntos de corte por programa</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-gray-50 border-b">
-                                <th class="text-left py-3 px-4">Programa académico</th>
-                                <th class="text-center py-3 px-4">Punto de corte</th>
-                                <th class="text-center py-3 px-4">Categoría</th>
-                                <th class="text-center py-3 px-4">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">Ingeniería de Sistemas</td>
-                                <td class="py-3 px-4 text-center">65</td>
-                                <td class="py-3 px-4 text-center">Ciencias exactas e ingenierías</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">Administración de Empresas</td>
-                                <td class="py-3 px-4 text-center">60</td>
-                                <td class="py-3 px-4 text-center">Ciencias económicas</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">Medicina</td>
-                                <td class="py-3 px-4 text-center">75</td>
-                                <td class="py-3 px-4 text-center">Ciencias de la salud</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            if (value > 0) {
+                input.classList.remove('border-red-300');
+                input.classList.add('border-green-300');
+                input.classList.add('text-green-600');
+                input.classList.add('font-medium');
+            } else {
+                resetInscriptionFee(container);
+            }
+        }
+
+        function toggleInscriptionFee(element) {
+            const container = element.closest('.inscription-fee-container');
+            const noText = container.querySelector('.inscription-no');
+            const inputDiv = container.querySelector('.inscription-input');
+            const valueText = container.querySelector('.inscription-value');
+            const input = inputDiv.querySelector('input');
+
+            if (noText && !noText.classList.contains('hidden')) {
+                // Cambiar de NO a input
+                noText.classList.add('hidden');
+                inputDiv.classList.remove('hidden');
+                if (valueText) valueText.classList.add('hidden');
+                input.focus();
+            } else if (valueText) {
+                // Cambiar de texto a input
+                valueText.classList.add('hidden');
+                inputDiv.classList.remove('hidden');
+                input.focus();
+            }
+        }
+
+        function toggleInscriptionToText(input) {
+            const container = input.closest('.inscription-fee-container');
+            const inputDiv = container.querySelector('.inscription-input');
+            const value = parseInt(input.value) || 0;
+
+            if (value > 0) {
+                let valueText = container.querySelector('.inscription-value');
+                if (!valueText) {
+                    valueText = document.createElement('span');
+                    valueText.className = 'inscription-value text-green-600 font-medium cursor-pointer';
+                    container.querySelector('.flex').appendChild(valueText);
+                }
+                valueText.textContent = `$${value.toLocaleString()}`;
+                valueText.onclick = () => toggleInscriptionFee(valueText);
+                valueText.classList.remove('hidden');
+                inputDiv.classList.add('hidden');
+            } else {
+                resetInscriptionFee(container);
+            }
+        }
+
+        function togglePesoToText(input) {
+            const container = input.closest('.peso-container');
+            const inputContainer = container.querySelector('.peso-input-container');
+            const text = container.querySelector('.peso-text');
+            const value = parseInt(input.value) || 0;
+
+            text.textContent = `${value}%`;
+            text.classList.remove('hidden');
+            inputContainer.classList.add('hidden');
             
-            <!-- Acciones -->
-            <div class="flex justify-between">
-                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
-                    <i class="fas fa-question-circle mr-2"></i>Ayuda
-                </button>
-                <div class="flex space-x-3">
-                    <button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-gray-50">
-                        <i class="fas fa-undo mr-2"></i>Restaurar valores predeterminados
-                    </button>
-                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
-                        <i class="fas fa-save mr-2"></i>Guardar cambios
-                    </button>
-                </div>
-            </div>
+            // Actualizar el color según el valor
+            if (value > 0) {
+                text.classList.add('text-green-600');
+            } else {
+                text.classList.remove('text-green-600');
+            }
+
+            // Actualizar el total después de cambiar el valor
+            const containerId = input.closest('[id^="selectedTests"]').id;
+            updateTotalPeso(containerId);
+        }
+
+        function togglePesoToInput(textElement) {
+            const container = textElement.closest('.peso-container');
+            const inputContainer = container.querySelector('.peso-input-container');
+            const input = inputContainer.querySelector('input');
+            const currentValue = parseInt(textElement.textContent) || 0;
+
+            input.value = currentValue;
+            textElement.classList.add('hidden');
+            inputContainer.classList.remove('hidden');
+            input.focus();
+        }
+
+        function resetInscriptionFee(container) {
+            const noText = container.querySelector('.inscription-no');
+            const inputDiv = container.querySelector('.inscription-input');
+            const valueText = container.querySelector('.inscription-value');
+            const input = inputDiv.querySelector('input');
+
+            if (valueText) valueText.classList.add('hidden');
+            noText.classList.remove('hidden');
+            noText.classList.add('text-red-600');
+            inputDiv.classList.add('hidden');
+            input.value = '0';
+            input.classList.remove('border-green-300', 'text-green-600', 'font-medium');
+        }
+
+        // Modificar el HTML existente para la primera prueba ICFES
+        document.addEventListener('DOMContentLoaded', function() {
+            const existingTests = document.querySelectorAll('#selectedTests1 .flex.items-center.gap-2.mb-2, #selectedTests2 .flex.items-center.gap-2.mb-2');
+            
+            existingTests.forEach(test => {
+                const currentInput = test.querySelector('input[data-test-peso]');
+                if (currentInput) {
+                    const currentValue = currentInput.value;
+                    const container = currentInput.closest('.flex.items-center.gap-1');
+                    
+                    const pesoContainer = document.createElement('div');
+                    pesoContainer.className = 'peso-container';
+                    pesoContainer.innerHTML = `
+                        <span class="peso-text text-sm font-medium cursor-pointer ${parseInt(currentValue) > 0 ? 'text-green-600' : ''}"
+                              onclick="togglePesoToInput(this)">${currentValue}%</span>
+                        <div class="peso-input-container hidden">
+                            <input type="number" 
+                                min="0" 
+                                max="100" 
+                                value="${currentValue}"
+                                class="w-16 text-center border rounded-lg px-2 py-1 text-sm"
+                                onchange="updateTotalPeso('${test.closest('[id^="selectedTests"]').id}')"
+                                onblur="togglePesoToText(this)"
+                                data-test-peso>
+                            <span class="text-sm text-gray-600">%</span>
+                        </div>
+                    `;
+                    
+                    container.replaceChild(pesoContainer, currentInput.parentElement);
+                }
+            });
+        });
+
+        function toggleEstado(element) {
+            if (element.classList.contains('fa-square-check')) {
+                // Cambiar de checkbox relleno verde a checkbox sin relleno
+                element.classList.remove('fa-square-check', 'text-green-500');
+                element.classList.add('fa-square', 'text-yellow-500');
+            } else {
+                // Cambiar de checkbox sin relleno a checkbox relleno verde
+                element.classList.remove('fa-square', 'text-yellow-500');
+                element.classList.add('fa-square-check', 'text-green-500');
+            }
+        }
+
+        // Agregar evento para el botón de guardar
+        saveButton.addEventListener('click', function() {
+            // Aquí iría la lógica para guardar los cambios
+            hasChanges = false;
+            updateSaveButton();
+            // Mostrar mensaje de éxito
+            alert('Cambios guardados exitosamente');
+        });
+    </script>
+            
+            
         </div>
     </div>
     
@@ -894,185 +1013,11 @@
     </script>
 </body>
 </html>
-    
-    <!-- Historial de cambios (colapsable) -->
-    <div class="container mx-auto p-4">
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <button class="flex justify-between items-center w-full" id="toggleHistory">
-                <h2 class="text-xl font-semibold text-primary">Historial de cambios</h2>
-                <i class="fas fa-chevron-down text-primary"></i>
-            </button>
-            
-            <div class="mt-4 hidden" id="historyContent">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-gray-50 border-b">
-                                <th class="text-left py-3 px-4">Fecha</th>
-                                <th class="text-left py-3 px-4">Usuario</th>
-                                <th class="text-left py-3 px-4">Descripción</th>
-                                <th class="text-center py-3 px-4">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">15/03/2024</td>
-                                <td class="py-3 px-4">admin@itm.edu.co</td>
-                                <td class="py-3 px-4">Actualización de ponderaciones para 2024-1</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="text-green-500 hover:text-green-700">
-                                        <i class="fas fa-undo"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-4">10/10/2023</td>
-                                <td class="py-3 px-4">director@itm.edu.co</td>
-                                <td class="py-3 px-4">Creación de perfil para 2023-2</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="text-green-500 hover:text-green-700">
-                                        <i class="fas fa-undo"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-4">05/04/2023</td>
-                                <td class="py-3 px-4">admin@itm.edu.co</td>
-                                <td class="py-3 px-4">Ajuste en ponderaciones de matemáticas</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="text-green-500 hover:text-green-700">
-                                        <i class="fas fa-undo"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Toggle para el historial
-            const toggleBtn = document.getElementById('toggleHistory');
-            const historyContent = document.getElementById('historyContent');
-            
-            toggleBtn.addEventListener('click', function() {
-                historyContent.classList.toggle('hidden');
-                const icon = toggleBtn.querySelector('i');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
-            });
-            
-            // Configuración del gráfico de barras
-            const barCtx = document.getElementById('barChart').getContext('2d');
-            const barChart = new Chart(barCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Matemáticas', 'Lectura crítica', 'Sociales', 'C. Naturales', 'Inglés'],
-                    datasets: [
-                        {
-                            label: 'Ciencias económicas',
-                            data: [2, 4, 2, 1, 1],
-                            backgroundColor: 'rgba(1, 28, 91, 0.7)',
-                        },
-                        {
-                            label: 'Ingenierías',
-                            data: [4, 3, 1, 1, 1],
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                        },
-                        {
-                            label: 'Ciencias de la salud',
-                            data: [3, 3, 2, 1, 1],
-                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                        },
-                        {
-                            label: 'Ciencias humanas',
-                            data: [1, 4, 4, 1, 1],
-                            backgroundColor: 'rgba(255, 159, 64, 0.7)',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Comparativa de ponderaciones'
-                        },
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 5
-                        }
-                    }
-                }
-            });
-            
-            // Configuración del gráfico de radar
-            const radarCtx = document.getElementById('radarChart').getContext('2d');
-            const radarChart = new Chart(radarCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['Matemáticas', 'Lectura crítica', 'Sociales', 'C. Naturales', 'Inglés'],
-                    datasets: [
-                        {
-                            label: 'Ciencias económicas',
-                            data: [2, 4, 2, 1, 1],
-                            borderColor: 'rgba(1, 28, 91, 1)',
-                            backgroundColor: 'rgba(1, 28, 91, 0.2)',
-                        },
-                        {
-                            label: 'Ingenierías',
-                            data: [4, 3, 1, 1, 1],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        },
-                        {
-                            label: 'Ciencias de la salud',
-                            data: [3, 3, 2, 1, 1],
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        },
-                        {
-                            label: 'Ciencias humanas',
-                            data: [1, 4, 4, 1, 1],
-                            borderColor: 'rgba(255, 159, 64, 1)',
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Perfil de ponderación por área'
-                        }
-                    },
-                    scales: {
-                        r: {
-                            min: 0,
-                            max: 5,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+
+[
+"icfes",
+"entrevista",
+"aptitudarte",
+"hojavida"
+]

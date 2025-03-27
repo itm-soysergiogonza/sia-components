@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Certificado EPS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @page {
+            margin: 0;
+            size: A4;
+        }
+        
+        @media print {
+            /* Ocultar header y footer del navegador */
+            @page {
+                margin: 0;
+            }
+            
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Ocultar la URL y fecha */
+            head, header, footer {
+                display: none !important;
+            }
+        }
+
+        /* Estilos para el PDF */
+        .pdf-container {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            background: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-montserrat">
+    <!-- Cabecera -->
+    <nav class="bg-black text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center">
+                <a href="../index.html" class="flex items-center">
+                    <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-10">
+                    <span class="ml-2 font-semibold">Componentes SIA</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-primary mb-6">Certificado de Afiliación a EPS</h1>
+            
+            <!-- Información del servicio -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-8">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            Este certificado valida tu afiliación al sistema de salud como estudiante activo del ITM.
+                            Puedes utilizarlo para trámites académicos y administrativos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nota informativa -->
+            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            Este certificado es válido para trámites académicos y administrativos. 
+                            Para verificar su autenticidad, puede ingresar al sistema SIA con su número de documento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de solicitud -->
+            <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">Generar Certificado</h2>
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Documento</label>
+                            <select class="w-full border rounded-lg px-4 py-2">
+                                <option>Certificado de Afiliación</option>
+                                <option>Constancia de Vigencia</option>
+                                <option>Historia de Afiliación</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Formato de Entrega</label>
+                            <select class="w-full border rounded-lg px-4 py-2">
+                                <option>PDF Digital</option>
+                                <option>Documento con Firma Digital</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Propósito del Certificado</label>
+                        <input type="text" placeholder="Ej: Trámite académico, Práctica profesional..." class="w-full border rounded-lg px-4 py-2">
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                            <i class="fas fa-file-medical mr-2"></i>Generar Certificado
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Vista previa del certificado -->
+            <div class="bg-white p-6 max-w-4xl mx-auto" id="certificado-preview">
+                <!-- Encabezado del certificado -->
+                <div class="mb-4">
+                    <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" class="h-14 mx-auto">
+                </div>
+
+                <!-- Información institucional -->
+                <div class="text-sm mb-4 text-center">
+                    <p>Identificado ante el DANE con el número: 10.500.103.391</p>
+                    <p>Registrado ante el ICFES con el código 3302</p>
+                    <p>NIT 800214750-7</p>
+                </div>
+
+                <!-- Título del departamento -->
+                <div class="text-center mb-4">
+                    <h2 class="font-bold text-lg">DEPARTAMENTO DE ADMISIONES Y PROGRAMACIÓN ACADÉMICA</h2>
+                    <p class="text-base">EL SUSCRITO JEFE DE OFICINA - DEPARTAMENTO DE ADMISIONES Y PROGRAMACIÓN</p>
+                </div>
+
+                <!-- Certificación -->
+                <div class="text-center mb-4">
+                    <h3 class="font-bold text-lg">CERTIFICA</h3>
+                </div>
+
+                <!-- Contenido del certificado -->
+                <div class="space-y-2 text-base">
+                    <p>Que <span class="font-bold" id="nombre-estudiante">ALVAREZ ACEVEDO JUAN ESTEBAN</span>, identificado con <span class="font-bold" id="tipo-documento">CC</span> <span class="font-bold" id="numero-documento">1216716946</span> de <span class="font-bold" id="ciudad-documento">Medellín (Antioquia)</span> y carnet <span class="font-bold" id="numero-carnet">24130029</span>, se matriculó para estudiar en esta institución durante el período académico <span class="font-bold" id="periodo">2014-2</span> el nivel <span class="font-bold" id="nivel">6</span> del programa <span class="font-bold" id="programa">Tecnología en Calidad</span>, incorporada en el sistema interno del SNIES, con una duración de <span class="font-bold" id="duracion">6</span> semestres así:</p>
+
+                    <div class="space-y-1 mt-2">
+                        <p>Registro MEN: <span class="font-bold" id="registro-men">53800</span></p>
+                        <p>Fecha de Registro: <span class="font-bold" id="fecha-registro">16 de septiembre de 2009</span></p>
+                        <p>Duración: <span class="font-bold" id="duracion-semestres">6</span> semestres</p>
+                        <p>Jornada: <span class="font-bold" id="jornada">MAÑANA</span></p>
+                        <p>Metodología: <span class="font-bold" id="metodologia">Presencial</span></p>
+                        <p>Educación: <span class="font-bold" id="tipo-educacion">Formal</span></p>
+                        <p>Edad: <span class="font-bold" id="edad">29</span> Años y <span class="font-bold" id="meses">4</span> meses</p>
+                        <p>Intensidad semanal de <span class="font-bold" id="intensidad">54</span> horas.</p>
+                    </div>
+                </div>
+
+                <!-- Nota -->
+                <div class="mt-4 italic text-sm">
+                    <p>NOTA: Este certificado se expide a solicitud del interesado.</p>
+                </div>
+
+                <!-- Lugar y fecha -->
+                <div class="mt-4 text-base">
+                    <p>Medellín, <span id="fecha-generacion">miércoles, 26 de marzo de 2025</span></p>
+                </div>
+
+                <!-- Firma -->
+                <div class="mt-6">
+                    <div class="border-t border-gray-400 w-64 mb-1"></div>
+                    <p class="text-base font-bold">Juan Camilo Patiño Vanegas</p>
+                    <p class="text-sm">Jefe Dpto. de Admisiones y Programación Académica</p>
+                    <p class="text-sm">C.C. 8.060.849</p>
+                </div>
+
+                <!-- Pie de página -->
+                <div class="mt-4 flex justify-between items-end text-xs">
+                    <div>
+                        <p>S.I.A. (Registro Académico)</p>
+                        <p>Generado por: JUAN ESTEBAN</p>
+                    </div>
+                    <div>
+                        <p>miércoles, 26 de marzo de 2025 8:17:06 a. m.</p>
+                    </div>
+                    <div>
+                        <img src="../assets/images/alcaldia.png" alt="Alcaldía de Medellín" class="h-10">
+                    </div>
+                </div>
+
+                <!-- Información de contacto -->
+                <div class="mt-2 text-[10px] text-center text-gray-600">
+                    <p>www.itm.edu.co</p>
+                    <p>Dirección: Calle 73 No. 76A - 354, Vía al Volador</p>
+                    <p>Teléfonos: (+604) 440 51 00 Fax: (+604) 440 51 02 | Nit: 800.214.750-7 | Código Postal: 050034</p>
+                    <p>INSTITUCIÓN UNIVERSITARIA ADSCRITA AL MUNICIPIO DE MEDELLÍN | VIGILADA MINEDUCACIÓN</p>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex justify-center gap-4 mt-8">
+                <button onclick="descargarPDF()" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-gray-50">
+                    <i class="fas fa-download mr-2"></i>Descargar PDF
+                </button>
+                <button onclick="imprimirCertificado()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+                    <i class="fas fa-print mr-2"></i>Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar antes del cierre del body -->
+    <script>
+        // Función para descargar PDF
+        function descargarPDF() {
+            const elemento = document.getElementById('certificado-preview');
+            
+            const opciones = {
+                margin: 0,
+                filename: 'certificado-itm.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { 
+                    scale: 2,
+                    letterRendering: true,
+                    useCORS: true,
+                    logging: true,
+                    scrollY: 0,
+                    width: 595.28,
+                    height: 841.89,
+                    removeContainer: true
+                },
+                jsPDF: { 
+                    unit: 'pt', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: false,
+                    putOnlyUsedFonts: true,
+                    floatPrecision: 16
+                },
+                pagebreak: { mode: 'avoid-all' }
+            };
+
+            // Crear un contenedor temporal sin headers/footers
+            const tempContainer = document.createElement('div');
+            tempContainer.className = 'pdf-container';
+            tempContainer.appendChild(elemento.cloneNode(true));
+            document.body.appendChild(tempContainer);
+
+            html2pdf()
+                .set(opciones)
+                .from(tempContainer)
+                .save()
+                .then(() => {
+                    document.body.removeChild(tempContainer);
+                });
+        }
+
+        // Función para imprimir
+        function imprimirCertificado() {
+            const contenidoOriginal = document.body.innerHTML;
+            const contenidoImprimir = document.getElementById('certificado-preview').innerHTML;
+            
+            document.body.innerHTML = `
+                <style>
+                    @media print {
+                        body {
+                            padding: 20mm;
+                            font-family: 'Montserrat', sans-serif;
+                        }
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                        }
+                    }
+                </style>
+                <div style="max-width: 210mm; margin: auto;">
+                    ${contenidoImprimir}
+                </div>
+            `;
+            
+            window.print();
+            document.body.innerHTML = contenidoOriginal;
+            
+            // Recargar los scripts después de restaurar el contenido
+            location.reload();
+        }
+
+        // Función para formatear la fecha actual
+        function obtenerFechaActual() {
+            const fecha = new Date();
+            const opciones = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return fecha.toLocaleDateString('es-CO', opciones);
+        }
+
+        // Establecer la fecha actual en el certificado
+        document.addEventListener('DOMContentLoaded', function() {
+            const fechaGeneracion = document.getElementById('fecha-generacion');
+            const fechaFormateada = obtenerFechaActual();
+            
+            if (fechaGeneracion) {
+                fechaGeneracion.textContent = fechaFormateada;
+            }
+        });
+
+        // Asegurarse de que las imágenes se carguen con CORS
+        document.addEventListener('DOMContentLoaded', function() {
+            const imagenes = document.getElementsByTagName('img');
+            Array.from(imagenes).forEach(img => {
+                img.crossOrigin = "Anonymous";
+            });
+        });
+    </script>
+
+    <!-- Agregar estilos específicos para la impresión -->
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificado-preview, #certificado-preview * {
+                visibility: visible;
+            }
+            #certificado-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20mm;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <!-- Agregar estilos específicos para el PDF -->
+    <style>
+        @media print {
+            #certificado-preview {
+                width: 210mm;
+                padding: 20mm;
+                margin: 0;
+                background-color: white;
+            }
+            
+            #certificado-preview img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            #certificado-preview * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+
+    <!-- Asegurarse de que las fuentes estén disponibles -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</body>
+</html>

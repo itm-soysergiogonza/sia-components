@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Registro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        institutional: {
+                            blue: '#011C5B',    // Azul Institucional
+                            gray: '#1D1D1B',    // Gray-3
+                            black: '#000000'     // Black
+                        },
+                        dark: {
+                            card: '#1D1D1B',    // Usando Gray-3 para el modo oscuro
+                            input: '#2A2A2A',
+                            hover: '#011C5B'     // Azul Institucional para hover
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-institutional-surface dark:bg-institutional-surfaceDark min-h-screen flex items-center justify-center p-4 transition-colors duration-300">
+    <!-- Theme Toggle -->
+    <div class="absolute top-4 right-4">
+        <button id="themeToggle" class="p-2 rounded-full bg-institutional-gray/10 dark:bg-institutional-gray/30 hover:bg-institutional-gray/20 dark:hover:bg-institutional-gray/40 transition-colors">
+            <i class="fas fa-moon text-institutional-gray dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:block text-white"></i>
+        </button>
+    </div>
+
+    <div class="w-full max-w-2xl">
+        <!-- Register Card -->
+        <div class="bg-white dark:bg-institutional-blue/10 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden transition-colors">
+            <!-- Logo Section -->
+            <div class="p-8 text-center">
+                <img src="../assets/images/Logo.svg" alt="ITM Logo" class="h-24 mx-auto mb-6 hidden dark:block">
+                <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" class="h-24 mx-auto mb-6 dark:hidden">
+                <h2 class="text-2xl font-bold text-institutional-blue dark:text-white mb-2">Registro a ITM</h2>
+                <p class="text-gray-600 dark:text-gray-300">Ingresa tu información</p>
+            </div>
+
+            <!-- Register Form -->
+            <div class="p-8 pt-0">
+                <form id="registerForm" class="space-y-6">
+                    <!-- Tipo de documento y Documento -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                TIPO DE DOCUMENTO
+                            </label>
+                            <select class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="CC">Cédula de Ciudadanía</option>
+                                <option value="TI">Tarjeta de Identidad</option>
+                                <option value="CE">Cédula de Extranjería</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                DOCUMENTO
+                            </label>
+                            <input type="text" placeholder="Ingrese su documento" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Nombres -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                PRIMER NOMBRE
+                            </label>
+                            <input type="text" placeholder="Ingrese su primer nombre" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                SEGUNDO NOMBRE
+                            </label>
+                            <input type="text" placeholder="Ingrese su segundo nombre" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                PRIMER APELLIDO
+                            </label>
+                            <input type="text" placeholder="Ingrese su primer apellido" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                SEGUNDO APELLIDO
+                            </label>
+                            <input type="text" placeholder="Ingrese su segundo apellido" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Correo (ahora sin dominio) -->
+                    <div>
+                        <label class="block text-sm font-medium text-institutional-blue mb-1">
+                            CORREO
+                        </label>
+                        <input type="email" 
+                               placeholder="Ingrese su correo" 
+                               class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div>
+                        <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                            TELÉFONO
+                        </label>
+                        <input type="tel" placeholder="Ingrese su teléfono" 
+                               class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                CONTRASEÑA
+                            </label>
+                            <input type="password" placeholder="••••••••" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                REPETIR CONTRASEÑA
+                            </label>
+                            <input type="password" placeholder="••••••••" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Pregunta de seguridad -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                PREGUNTA DE SEGURIDAD
+                            </label>
+                            <select class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="mascota">¿Nombre de su primera mascota?</option>
+                                <option value="ciudad">¿Ciudad donde nació?</option>
+                                <option value="colegio">¿Nombre de su primer colegio?</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-institutional-gray dark:text-gray-300 mb-1">
+                                RESPUESTA DE SEGURIDAD
+                            </label>
+                            <input type="text" placeholder="Ingrese su respuesta" 
+                                   class="w-full p-2 border border-institutional-gray/20 rounded-md focus:ring-2 focus:ring-institutional-blue focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Términos y condiciones -->
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="terminos" class="rounded border-institutional-gray/20 text-institutional-blue focus:ring-institutional-blue">
+                        <label for="terminos" class="text-sm text-institutional-gray dark:text-gray-300">
+                            ¿Acepta tratamiento de datos personales? 
+                            <a href="#" class="text-institutional-blue hover:text-institutional-blue-light dark:text-blue-400 dark:hover:text-blue-300 hover:underline">Ver Aquí</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full bg-institutional-blue text-white py-2 rounded-md hover:bg-blue-900 transition-colors">
+                        Registrar
+                    </button>
+
+                    <div class="text-center">
+                        <span class="text-institutional-gray dark:text-gray-300">¿Ya tienes una cuenta?</span>
+                        <a href="../login/index.html" 
+                           class="text-institutional-blue hover:text-institutional-blue-light dark:text-blue-400 dark:hover:text-blue-300 hover:underline ml-1">
+                            Inicia sesión aquí
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Password Visibility Toggle
+        document.querySelector('.fa-eye-slash').parentElement.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        });
+
+        // Form Submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aquí iría la lógica de registro
+            alert('Registro exitoso');
+            window.location.href = '../login/index.html';
+        });
+    </script>
+</body>
+</html>
