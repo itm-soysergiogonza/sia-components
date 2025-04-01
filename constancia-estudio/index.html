@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM - Certificado de Estudio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Cambiado a reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeHcgYrAAAAACiSgMjBfnnx0AQ0Pcf9Jn6dyeXC"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#011C5B',
+                            dark: '#001440',
+                            light: '#1a3a8f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @page {
+            margin: 0;
+            size: A4;
+        }
+        
+        @media print {
+            /* Ocultar header y footer del navegador */
+            @page {
+                margin: 0;
+            }
+            
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Ocultar la URL y fecha */
+            head, header, footer {
+                display: none !important;
+            }
+        }
+
+        /* Estilos para el PDF */
+        .pdf-container {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            background: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-montserrat">
+    <!-- Actualizar el contenedor del toast y sus estilos -->
+    <div id="toastContainer" class="fixed top-4 right-4 mx-4 w-full max-w-xs z-50"></div>
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+            <!-- Logo y título -->
+            <div class="text-center mb-8">
+                <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" class="h-16 mx-auto mb-2">
+                <p class="text-sm text-gray-600">Reacreditada en Alta Calidad</p>
+                <h1 class="text-2xl font-bold text-[#011C5B] mt-4">Certificado de Estudio</h1>
+            </div>
+
+            <!-- Formulario inicial -->
+            <form id="certificadoForm" class="space-y-6">
+                <div>
+                    <label for="documento" class="block text-sm font-medium text-gray-700 mb-2">
+                        Número de Documento
+                    </label>
+                    <input 
+                        type="text" 
+                        id="documento" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#011C5B] focus:border-transparent"
+                        placeholder="Ingrese su número de documento"
+                        required
+                    >
+                </div>
+
+                <button 
+                    type="submit"
+                    class="w-full bg-[#011C5B] text-white py-3 px-4 rounded-lg hover:bg-[#001440] transition-colors"
+                >
+                    Generar Certificado
+                </button>
+            </form>
+
+            <!-- Modal de confirmación (inicialmente oculto) -->
+            <div id="confirmacionModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                    <div class="mt-3 text-center">
+                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                            <i class="fas fa-check text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">¡Certificado Generado!</h3>
+                        <div class="mt-2 px-7 py-3">
+                            <p class="text-sm text-gray-500">
+                                El certificado ha sido enviado a su correo electrónico:
+                            </p>
+                            <p class="text-sm font-medium text-gray-800 mt-2" id="correoEnmascarado"></p>
+                        </div>
+                        <div class="items-center px-4 py-3">
+                            <button id="cerrarModal" class="px-4 py-2 bg-[#011C5B] text-white text-base font-medium rounded-lg w-full shadow-sm hover:bg-[#001440] focus:outline-none">
+                                Aceptar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DOCUMENTO_PRUEBA = '1234567890';
+        const DATA_FAKE = {
+            correo: 'john.connor@estudianteitm.edu.co'
+        };
+
+        // Función para enmascarar correo
+        function enmascararCorreo(email) {
+            const [usuario, dominio] = email.split('@');
+            const usuarioEnmascarado = usuario.charAt(0) + 
+                                     '*'.repeat(usuario.length - 2) + 
+                                     usuario.charAt(usuario.length - 1);
+            return `${usuarioEnmascarado}@${dominio}`;
+        }
+
+        // Función para mostrar toast
+        function mostrarToast(mensaje, tipo = 'error') {
+            const toast = document.createElement('div');
+            toast.className = `toast flex items-center w-full p-4 rounded-lg ${
+                tipo === 'error' ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-500'
+            }`;
+            
+            toast.innerHTML = `
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 ${
+                    tipo === 'error' ? 'bg-red-100 text-red-500' : 'bg-green-100 text-green-500'
+                } rounded-lg">
+                    <i class="fas ${tipo === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i>
+                </div>
+                <div class="ml-3 text-sm font-normal flex-grow">${mensaje}</div>
+                <button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 inline-flex h-8 w-8 hover:bg-gray-100" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            const container = document.getElementById('toastContainer');
+            container.appendChild(toast);
+            
+            // Forzar un reflow para que la animación funcione
+            toast.offsetHeight;
+            
+            // Mostrar el toast con animación
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+
+            // Remover el toast después de 5 segundos
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 500);
+            }, 5000);
+        }
+
+        document.getElementById('certificadoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const documento = document.getElementById('documento').value;
+
+            if (documento === DOCUMENTO_PRUEBA) {
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6LeHcgYrAAAAACiSgMjBfnnx0AQ0Pcf9Jn6dyeXC', {
+                        action: 'generar_certificado'
+                    }).then(function(token) {
+                        // Simular generación y envío
+                        setTimeout(() => {
+                            document.getElementById('correoEnmascarado').textContent = 
+                                enmascararCorreo(DATA_FAKE.correo);
+                            document.getElementById('confirmacionModal').classList.remove('hidden');
+                        }, 1500);
+                    });
+                });
+            } else {
+                mostrarToast('El número de documento no se encuentra registrado en el sistema');
+            }
+        });
+
+        // Cerrar modal
+        document.getElementById('cerrarModal').addEventListener('click', function() {
+            document.getElementById('confirmacionModal').classList.add('hidden');
+            document.getElementById('documento').value = '';
+        });
+    </script>
+
+    <!-- Agregar estilos específicos para la impresión -->
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificado-preview, #certificado-preview * {
+                visibility: visible;
+            }
+            #certificado-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20mm;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <!-- Agregar estilos específicos para el PDF -->
+    <style>
+        @media print {
+            #certificado-preview {
+                width: 210mm;
+                padding: 20mm;
+                margin: 0;
+                background-color: white;
+            }
+            
+            #certificado-preview img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            #certificado-preview * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+
+    <!-- Asegurarse de que las fuentes estén disponibles -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Agregar estilos para las alertas -->
+    <style>
+        .alert-enter {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .alert-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
+        }
+        .alert-exit {
+            opacity: 1;
+        }
+        .alert-exit-active {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 300ms, transform 300ms;
+        }
+    </style>
+
+    <!-- Agregar el template del certificado (oculto) -->
+    <div id="certificadoTemplate" class="hidden">
+        <div id="certificadoEPS" class="hidden">
+            <div class="bg-white p-8" style="font-family: 'Montserrat', sans-serif;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" style="height: 60px; margin: 0 auto;">
+                    <p style="font-size: 12px; color: #666;">Identificado ante el DANE con el número: 10.500.103.391</p>
+                    <p style="font-size: 12px; color: #666;">Registrado ante el ICFES con el código 3302</p>
+                    <p style="font-size: 12px; color: #666;">NIT 800214750-7</p>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-weight: bold; margin-bottom: 10px;">DEPARTAMENTO DE ADMISIONES Y PROGRAMACIÓN ACADÉMICA</h2>
+                    <h3 style="font-weight: bold;">CERTIFICA</h3>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <p>Que <span class="estudiante-nombre" style="font-weight: bold;"></span>, identificado con CC <span class="estudiante-documento" style="font-weight: bold;"></span>, se encuentra afiliado al Sistema de Seguridad Social en Salud a través de <span style="font-weight: bold;">SURA EPS</span>, en calidad de estudiante activo del programa <span class="estudiante-programa" style="font-weight: bold;"></span>.</p>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <p style="font-style: italic;">NOTA: Este certificado se expide a solicitud del interesado.</p>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <p>Medellín, <span class="fecha-actual"></span></p>
+                </div>
+
+                <div style="margin-top: 60px; border-top: 1px solid #000; width: 250px;">
+                    <p style="font-weight: bold; margin-bottom: 5px;">Juan Camilo Patiño Vanegas</p>
+                    <p style="margin-bottom: 5px;">Jefe Dpto. de Admisiones y Programación Académica</p>
+                    <p>C.C. 8.060.849</p>
+                </div>
+
+                <div style="margin-top: 40px; font-size: 10px; text-align: center; color: #666;">
+                    <p>www.itm.edu.co</p>
+                    <p>Calle 73 No. 76A - 354, Vía al Volador</p>
+                    <p>Teléfonos: (+604) 440 51 00 • Fax: (+604) 440 51 02</p>
+                    <p>INSTITUCIÓN UNIVERSITARIA ADSCRITA AL MUNICIPIO DE MEDELLÍN</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="constanciaEstudio" class="hidden">
+            <div class="bg-white p-8" style="font-family: 'Montserrat', sans-serif;">
+                <!-- Similar estructura pero para constancia de estudio -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="../assets/images/LogoBlue.svg" alt="ITM Logo" style="height: 60px; margin: 0 auto;">
+                    <p style="font-size: 12px; color: #666;">Identificado ante el DANE con el número: 10.500.103.391</p>
+                    <p style="font-size: 12px; color: #666;">Registrado ante el ICFES con el código 3302</p>
+                    <p style="font-size: 12px; color: #666;">NIT 800214750-7</p>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-weight: bold; margin-bottom: 10px;">CONSTANCIA DE ESTUDIO</h2>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <p>El Departamento de Admisiones y Programación Académica certifica que <span class="estudiante-nombre" style="font-weight: bold;"></span>, identificado con CC <span class="estudiante-documento" style="font-weight: bold;"></span>, es estudiante activo del programa <span class="estudiante-programa" style="font-weight: bold;"></span>, cursando el semestre <span class="estudiante-semestre" style="font-weight: bold;"></span>.</p>
+                </div>
+
+                <!-- ... resto del contenido similar ... -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Estilos actualizados para el toast */
+        .toast {
+            transform: translateX(120%);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            max-width: 320px;
+            margin-left: auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+    </style>
+</body>
+</html>
